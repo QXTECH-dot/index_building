@@ -1,0 +1,254 @@
+{
+  "crawledAt": "2026-02-26T03:49:39.899Z",
+  "baseUrl": "https://indexbuilding.com.au",
+  "business": {
+    "name": "Index Building",
+    "tagline": "Canberra's trusted construction and renovation specialists",
+    "address": "12/233 Flemington Road, Franklin ACT 2913",
+    "phone": "+61 416 217 919",
+    "email": "stephen@indexbuilding.com.au",
+    "hours": {
+      "weekdays": "09:00 AM – 6:30 PM",
+      "saturday": "Closed",
+      "sunday": "Closed"
+    },
+    "area": "Canberra, ACT, Australia"
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    },
+    {
+      "label": "Projects",
+      "href": "/projects"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "pages": {
+    "home": {
+      "slug": "home",
+      "title": "Index Building – Canberra Construction & Renovation",
+      "metaDescription": "Index Building is Canberra's trusted construction and renovation firm. We specialize in house construction, shop renovation, flooring installation, and repairs across the ACT.",
+      "h1": "Quality Construction & Renovation in Canberra",
+      "heroImage": "/assets/images/bg_header.jpg",
+      "heroImages": [
+        "/assets/images/bg_header.jpg",
+        "/assets/images/house.jpg",
+        "/assets/images/bel.jpg",
+        "/assets/images/con.jpg"
+      ]
+    },
+    "about": {
+      "slug": "about",
+      "title": "About Us – Index Building Canberra",
+      "metaDescription": "Learn about Index Building – a premier construction and renovation firm based in Canberra dedicated to quality craftsmanship and customer satisfaction.",
+      "h1": "About Us",
+      "body": [
+        "Building Index is a premier construction and renovation firm based in Canberra, dedicated to transforming residential spaces with precision and care. With a strong focus on quality and customer satisfaction, we specialize in house construction, renovations, flooring installations, and comprehensive house repairs.",
+        "Our team of skilled professionals brings years of experience and a deep commitment to excellence in every project we undertake. We work closely with our clients to understand their vision and ensure that every detail reflects their personal style and needs.",
+        "At Building Index, we focus on creating functional, stylish, and durable living spaces that reflect our clients' unique needs and tastes. With a commitment to excellence and attention to detail, we ensure every project is completed to the highest standards.",
+        "Trust us to be your partner in building and enhancing your home, providing solutions that stand the test of time."
+      ],
+      "image": "/assets/images/about.jpg",
+      "testimonial": {
+        "quote": "Thank you IndexBuilding, you are dedicated, professional and efficient. Thank you for your hard work.",
+        "attribution": "A customer from Canberra"
+      }
+    },
+    "services": {
+      "slug": "services",
+      "title": "Our Services – Index Building Canberra",
+      "metaDescription": "Index Building offers expert shop renovation, house construction, flooring installation, and house repair services across Canberra, ACT.",
+      "h1": "Our Services",
+      "items": [
+        {
+          "name": "Shop Renovation",
+          "description": "We specialize in transforming commercial spaces into modern, functional, and aesthetically pleasing environments. Our expert team handles every aspect of the renovation process, from initial design consultation to the final touches. We ensure that your shop reflects your brand's identity while creating an inviting atmosphere for customers.",
+          "image": "/assets/images/bel.jpg"
+        },
+        {
+          "name": "House Construction",
+          "description": "We specialize in building custom homes that blend quality craftsmanship with innovative design. From the initial planning and architectural design to the final construction, our experienced team is committed to delivering your dream home on time and within budget. We work closely with you to understand your vision and ensure that every detail reflects your personal style and needs.",
+          "image": "/assets/images/house.jpg"
+        },
+        {
+          "name": "Flooring Installation",
+          "description": "We offer professional flooring installation and renovation services to enhance the beauty and functionality of your home or commercial space. Whether you're looking for hardwood, laminate, tile, or vinyl flooring, our expert team provides high-quality craftsmanship and attention to detail.",
+          "image": "/assets/images/con.jpg"
+        },
+        {
+          "name": "House Repairs",
+          "description": "From minor fixes to major structural repairs, our team handles all aspects of residential maintenance and repair. We ensure your property remains safe, functional, and well-maintained with quality workmanship on every job.",
+          "image": "/assets/images/house.jpg"
+        }
+      ]
+    },
+    "projects": {
+      "slug": "projects",
+      "title": "Our Projects – Index Building Canberra",
+      "metaDescription": "Explore Index Building's portfolio of completed projects in Canberra – house construction, commercial renovations, flooring, and more.",
+      "h1": "Our Projects",
+      "items": [
+        {
+          "title": "Whitlam New Project – Anna and Tony's House",
+          "description": "New home construction in the Whitlam estate, Canberra.",
+          "image": "/assets/images/xhs-whitlam-1.jpg"
+        },
+        {
+          "title": "Belconnen Fresh Market",
+          "description": "Commercial shop renovation at Belconnen Fresh Market, Canberra.",
+          "image": "/assets/images/xhs-belconnen-2.jpg"
+        },
+        {
+          "title": "Downer Granny Flat",
+          "description": "Granny flat construction in Downer, Canberra.",
+          "image": "/assets/images/house.jpg"
+        },
+        {
+          "title": "Denman Phase II – First Electrified Home",
+          "description": "The first fully electrified house in Denman Phase II, Canberra.",
+          "image": "/assets/images/xhs-denman-1.jpg"
+        },
+        {
+          "title": "Kaleen Granny Flat",
+          "description": "Backyard granny flat addition in Kaleen, Canberra.",
+          "image": "/assets/images/portfolio-img5.jpg"
+        },
+        {
+          "title": "Whitlam Project Groundbreaking",
+          "description": "Construction commencement for a new residential build in Whitlam.",
+          "image": "/assets/images/xhs-whitlam-groundbreaking.jpg"
+        },
+        {
+          "title": "Garage Door Installation",
+          "description": "Residential garage door installation, Canberra.",
+          "image": "/assets/images/xhs-garage-door.jpg"
+        },
+        {
+          "title": "Decking Construction",
+          "description": "Outdoor decking construction and renovation.",
+          "image": "/assets/images/con.jpg"
+        }
+      ]
+    },
+    "contact": {
+      "slug": "contact",
+      "title": "Contact Us – Index Building Canberra",
+      "metaDescription": "Get in touch with Index Building for your construction and renovation project in Canberra. Call +61 416 217 919 or email stephen@indexbuilding.com.au.",
+      "h1": "Contact Us"
+    }
+  },
+  "assets": {
+    "logo": "/assets/images/logo.png",
+    "images": [
+      {
+        "name": "logo.png",
+        "localPath": "/assets/images/logo.png",
+        "alt": "Index Building logo"
+      },
+      {
+        "name": "bel.jpg",
+        "localPath": "/assets/images/bel.jpg",
+        "alt": "Belconnen Fresh Market renovation"
+      },
+      {
+        "name": "house.jpg",
+        "localPath": "/assets/images/house.jpg",
+        "alt": "House construction project"
+      },
+      {
+        "name": "con.jpg",
+        "localPath": "/assets/images/con.jpg",
+        "alt": "Construction and flooring project"
+      },
+      {
+        "name": "about.jpg",
+        "localPath": "/assets/images/about.jpg",
+        "alt": "Index Building team"
+      },
+      {
+        "name": "bg_header.jpg",
+        "localPath": "/assets/images/bg_header.jpg",
+        "alt": "Index Building hero background"
+      },
+      {
+        "name": "portfolio-img1.jpg",
+        "localPath": "/assets/images/portfolio-img1.jpg",
+        "alt": "Whitlam new project"
+      },
+      {
+        "name": "portfolio-img2.jpg",
+        "localPath": "/assets/images/portfolio-img2.jpg",
+        "alt": "Construction project"
+      },
+      {
+        "name": "portfolio-img3.jpg",
+        "localPath": "/assets/images/portfolio-img3.jpg",
+        "alt": "Belconnen Fresh Market project"
+      },
+      {
+        "name": "portfolio-img4.jpg",
+        "localPath": "/assets/images/portfolio-img4.jpg",
+        "alt": "Denman project"
+      },
+      {
+        "name": "portfolio-img5.jpg",
+        "localPath": "/assets/images/portfolio-img5.jpg",
+        "alt": "Renovation project"
+      },
+      {
+        "name": "portfolio-img6.jpg",
+        "localPath": "/assets/images/portfolio-img6.jpg",
+        "alt": "Whitlam project construction start"
+      },
+      {
+        "name": "portfolio-img7.jpg",
+        "localPath": "/assets/images/portfolio-img7.jpg",
+        "alt": "Building project"
+      },
+      {
+        "name": "portfolio-img8.jpg",
+        "localPath": "/assets/images/portfolio-img8.jpg",
+        "alt": "Construction project"
+      },
+      {
+        "name": "xhs-whitlam-1.jpg",
+        "localPath": "/assets/images/xhs-whitlam-1.jpg",
+        "alt": "Whitlam new home project"
+      },
+      {
+        "name": "xhs-belconnen-2.jpg",
+        "localPath": "/assets/images/xhs-belconnen-2.jpg",
+        "alt": "Belconnen Fresh Market, Canberra"
+      },
+      {
+        "name": "xhs-denman-1.jpg",
+        "localPath": "/assets/images/xhs-denman-1.jpg",
+        "alt": "First house in Denman Phase II to be electrified"
+      },
+      {
+        "name": "xhs-garage-door.jpg",
+        "localPath": "/assets/images/xhs-garage-door.jpg",
+        "alt": "Garage door installation, Canberra"
+      },
+      {
+        "name": "xhs-whitlam-groundbreaking.jpg",
+        "localPath": "/assets/images/xhs-whitlam-groundbreaking.jpg",
+        "alt": "Whitlam project groundbreaking ceremony"
+      },
+      {
+        "name": "xhs-img3.jpg",
+        "localPath": "/assets/images/xhs-img3.jpg",
+        "alt": "Building project Canberra"
+      }
+    ]
+  }
+}
