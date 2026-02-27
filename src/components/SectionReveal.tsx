@@ -17,35 +17,38 @@ export function SectionReveal({ children, className, delay = 0, as: Tag = 'div' 
     const el = ref.current
     if (!el) return
 
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
-    if (mq.matches) {
-      el.style.opacity = '1'
-      el.style.transform = 'none'
-      return
-    }
+    // Reduced motion – leave content visible, skip animation entirely
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    // If the element is already in the viewport on mount, don't hide it
+    const rect = el.getBoundingClientRect()
+    if (rect.top < window.innerHeight - 20) return
+
+    // Element is below the fold – apply hide state via JS only (never SSR)
+    el.style.opacity = '0'
+    el.style.transform = 'translateY(10px)'
+    el.style.transition = `opacity 160ms ease-out ${delay}ms, transform 160ms ease-out ${delay}ms`
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
-            setTimeout(() => {
-              el.classList.add('visible')
-            }, delay)
+            el.style.opacity = '1'
+            el.style.transform = 'translateY(0)'
             observer.unobserve(el)
           }
-        })
+        }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 40px 0px' }
     )
 
     observer.observe(el)
     return () => observer.disconnect()
   }, [delay])
 
-  // Use any to allow dynamic tag + ref combination
-  const Comp = Tag as React.ElementType<{ ref: React.Ref<HTMLElement>; className: string }>
+  const Comp = Tag as React.ElementType<{ ref: React.Ref<HTMLElement>; className?: string }>
   return (
-    <Comp ref={ref} className={cn('reveal', className)}>
+    <Comp ref={ref} className={cn(className)}>
       {children}
     </Comp>
   )
