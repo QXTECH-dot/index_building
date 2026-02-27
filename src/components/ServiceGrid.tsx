@@ -30,6 +30,7 @@ function ServiceCard({ service }: { service: ServiceItem }) {
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 620px"
+            loading="lazy"
           />
           {/* Hover overlay */}
           <div

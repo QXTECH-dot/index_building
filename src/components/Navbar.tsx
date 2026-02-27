@@ -49,9 +49,9 @@ export function Navbar() {
               height={40}
               className={cn(
                 'h-8 w-auto object-contain transition-all duration-300',
-                !scrolled && 'brightness-0 invert' // white logo on transparent bg
+                !scrolled && 'brightness-0 invert'
               )}
-              priority
+              loading="lazy"
             />
           ) : (
             <span className={cn(
