@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "crawl": "tsx scripts/crawl.ts"
+    "crawl": "tsx scripts/fetch-assets.ts"
   },
   "dependencies": {
     "next": "14.2.29",

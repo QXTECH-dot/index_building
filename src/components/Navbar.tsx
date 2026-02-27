@@ -16,21 +16,21 @@ export function Navbar() {
   const pathname = usePathname()
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20)
+    const handler = () => setScrolled(window.scrollY > 24)
+    handler() // run on mount
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
-  // Close menu on route change
-  useEffect(() => setMenuOpen(false), [pathname])
+  useEffect(() => { setMenuOpen(false) }, [pathname])
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 will-change-[height,background]',
         scrolled
-          ? 'bg-white/95 backdrop-blur-sm shadow-sm h-16'
-          : 'bg-white/80 backdrop-blur-sm h-20'
+          ? 'bg-white/96 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.06)] h-16'
+          : 'bg-transparent h-20'
       )}
       role="banner"
     >
@@ -47,50 +47,66 @@ export function Navbar() {
               alt="Index Building"
               width={140}
               height={40}
-              className="h-8 w-auto object-contain"
+              className={cn(
+                'h-8 w-auto object-contain transition-all duration-300',
+                !scrolled && 'brightness-0 invert' // white logo on transparent bg
+              )}
               priority
             />
           ) : (
-            <span className="font-display font-semibold text-lg tracking-tight text-stone-900">
+            <span className={cn(
+              'font-display font-semibold text-lg tracking-tight transition-colors duration-300',
+              scrolled ? 'text-stone-900' : 'text-white'
+            )}>
               Index Building
             </span>
           )}
         </Link>
 
         {/* Desktop nav */}
-        <nav
-          className="hidden md:flex items-center gap-8"
-          aria-label="Main navigation"
-        >
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'text-sm font-medium transition-colors duration-150',
-                pathname === item.href
-                  ? 'text-stone-900'
-                  : 'text-stone-500 hover:text-stone-900'
-              )}
-              aria-current={pathname === item.href ? 'page' : undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link href={PRIMARY_CTA_HREF} className="btn-primary text-sm px-5 py-2.5">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+          {navItems.filter(i => i.href !== '/').map((item) => {
+            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive ? 'page' : undefined}
+                className={cn(
+                  'relative text-sm font-medium transition-colors duration-150 py-1',
+                  'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:rounded',
+                  'after:transition-all after:duration-150',
+                  isActive
+                    ? (scrolled ? 'text-stone-900 after:bg-stone-900' : 'text-white after:bg-white')
+                    : (scrolled ? 'text-stone-500 hover:text-stone-900 after:bg-transparent hover:after:bg-stone-200' : 'text-white/70 hover:text-white after:bg-transparent hover:after:bg-white/40')
+                )}
+              >
+                {item.label}
+              </Link>
+            )
+          })}
+          <Link
+            href={PRIMARY_CTA_HREF}
+            className={cn(
+              'btn-primary text-sm px-5 py-2.5 transition-all duration-150',
+              !scrolled && 'bg-white text-stone-900 hover:bg-stone-100'
+            )}
+          >
             {PRIMARY_CTA_LABEL}
           </Link>
         </nav>
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 -mr-2 text-stone-600 hover:text-stone-900 transition-colors"
+          className={cn(
+            'md:hidden p-2 -mr-2 transition-colors',
+            scrolled ? 'text-stone-600 hover:text-stone-900' : 'text-white hover:text-white/70'
+          )}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-controls="mobile-menu"
         >
-          <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
           <svg
             className="w-5 h-5"
             fill="none"
@@ -110,36 +126,35 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div
+        <nav
           id="mobile-menu"
-          className="md:hidden bg-white border-t border-stone-100 shadow-md"
-          role="navigation"
+          className="md:hidden bg-white border-t border-stone-100 shadow-lg"
           aria-label="Mobile navigation"
         >
-          <nav className="container-site py-4 flex flex-col gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'px-3 py-2.5 rounded-md text-sm font-medium transition-colors',
-                  pathname === item.href
-                    ? 'bg-stone-100 text-stone-900'
-                    : 'text-stone-600 hover:bg-stone-50 hover:text-stone-900'
-                )}
-                aria-current={pathname === item.href ? 'page' : undefined}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Link
-              href={PRIMARY_CTA_HREF}
-              className="btn-primary mt-2 text-center text-sm"
-            >
+          <div className="container-site py-4 flex flex-col gap-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={cn(
+                    'px-3 py-2.5 rounded-md text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-stone-100 text-stone-900'
+                      : 'text-stone-600 hover:bg-stone-50 hover:text-stone-900'
+                  )}
+                >
+                  {item.label}
+                </Link>
+              )
+            })}
+            <Link href={PRIMARY_CTA_HREF} className="btn-primary mt-2 text-center text-sm">
               {PRIMARY_CTA_LABEL}
             </Link>
-          </nav>
-        </div>
+          </div>
+        </nav>
       )}
     </header>
   )

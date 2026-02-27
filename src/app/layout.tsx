@@ -23,6 +23,11 @@ const business = getBusiness()
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   title: {
     default: 'Index Building – Canberra Construction & Renovation',
     template: '%s | Index Building',
@@ -69,6 +74,13 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${inter.variable} ${playfair.variable}`}>
       <body className="min-h-screen flex flex-col">
+        {/* Skip to content – keyboard accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-stone-900 focus:text-white focus:rounded-md focus:text-sm focus:font-medium"
+        >
+          Skip to main content
+        </a>
         <Navbar />
         <main className="flex-1" id="main-content">
           {children}

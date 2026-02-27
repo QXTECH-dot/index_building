@@ -1,13 +1,13 @@
 'use client'
 
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode, type ElementType } from 'react'
 import { cn } from '@/lib/utils'
 
 interface Props {
   children: ReactNode
   className?: string
-  delay?: number // ms
-  as?: keyof JSX.IntrinsicElements
+  delay?: number
+  as?: ElementType
 }
 
 export function SectionReveal({ children, className, delay = 0, as: Tag = 'div' }: Props) {
@@ -17,7 +17,6 @@ export function SectionReveal({ children, className, delay = 0, as: Tag = 'div' 
     const el = ref.current
     if (!el) return
 
-    // Respect reduced motion - just show immediately
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mq.matches) {
       el.style.opacity = '1'
@@ -43,12 +42,10 @@ export function SectionReveal({ children, className, delay = 0, as: Tag = 'div' 
     return () => observer.disconnect()
   }, [delay])
 
-  const Comp = Tag as React.ElementType
+  // Use any to allow dynamic tag + ref combination
+  const Comp = Tag as React.ElementType<{ ref: React.Ref<HTMLElement>; className: string }>
   return (
-    <Comp
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className={cn('reveal', className)}
-    >
+    <Comp ref={ref} className={cn('reveal', className)}>
       {children}
     </Comp>
   )

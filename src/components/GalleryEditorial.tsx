@@ -14,9 +14,9 @@ export function GalleryEditorial({ projects, limit }: GalleryEditorialProps) {
   if (withImages.length === 0) return null
 
   return (
-    <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+    <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
       {withImages.map((project, i) => (
-        <SectionReveal key={project.title} delay={i * 50} className="break-inside-avoid">
+        <SectionReveal key={project.title} delay={i * 50} className="break-inside-avoid mb-4">
           <GalleryItem project={project} index={i} />
         </SectionReveal>
       ))}

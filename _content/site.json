@@ -24,6 +24,10 @@
       "href": "/about"
     },
     {
+      "label": "Services",
+      "href": "/services"
+    },
+    {
       "label": "Projects",
       "href": "/projects"
     },

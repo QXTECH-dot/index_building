@@ -11,23 +11,32 @@
     --radius: 1rem;
   }
 
-  * {
-    @apply border-stone-200;
-  }
-
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     @apply bg-stone-50 text-stone-900 font-sans;
   }
 
+  /* Remove default border-box reset that clashes with * rule */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   /* Focus ring */
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-accent;
+    outline: 2px solid #1c1917;
+    outline-offset: 3px;
+  }
+
+  /* Smooth image rendering */
+  img {
+    display: block;
+    max-width: 100%;
   }
 }
 
@@ -44,16 +53,19 @@
     @apply py-12 md:py-16;
   }
 
-  /* Reveal animation */
+  /* Reveal animation – fade + tiny translate */
   .reveal {
-    @apply opacity-0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 160ms ease-out, transform 160ms ease-out;
   }
 
   .reveal.visible {
-    @apply animate-fadeUp opacity-100;
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  /* Heading styles */
+  /* Heading scale system */
   .h-display {
     @apply font-display font-semibold text-display-xl text-stone-900 tracking-tight;
   }
@@ -66,17 +78,23 @@
     @apply font-display font-medium text-display-md text-stone-900;
   }
 
-  /* Button base */
+  /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-stone-900 text-white text-sm font-medium rounded-btn
-    transition-all duration-150 hover:bg-stone-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900
-    active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+      bg-stone-900 text-white text-sm font-medium tracking-wide rounded-btn
+      transition-colors duration-150
+      hover:bg-stone-700
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:ring-offset-2
+      active:scale-[0.98] select-none;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-stone-900 text-sm font-medium rounded-btn border border-stone-300
-    transition-all duration-150 hover:bg-stone-100 hover:border-stone-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900
-    active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+      bg-transparent text-stone-900 text-sm font-medium tracking-wide rounded-btn border border-stone-300
+      transition-colors duration-150
+      hover:bg-stone-100 hover:border-stone-400
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:ring-offset-2
+      active:scale-[0.98] select-none;
   }
 
   /* Card */
@@ -86,11 +104,12 @@
 }
 
 @layer utilities {
-  /* Reduced motion overrides */
+  /* Respect prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
-    .reveal,
-    .reveal.visible {
-      @apply opacity-100 transform-none transition-none animate-none;
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
     }
 
     * {
