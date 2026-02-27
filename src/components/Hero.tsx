@@ -47,7 +47,7 @@ export function Hero({ h1, subtitle, imageSrc, imageAlt }: HeroProps) {
           </p>
 
           <h1
-            className="font-display font-semibold text-white leading-[1.08] tracking-[-0.02em] mb-6"
+            className="font-display font-bold text-white leading-[1.04] tracking-[-0.03em] mb-6"
             style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)' }}
           >
             {h1}

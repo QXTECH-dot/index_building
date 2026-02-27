@@ -30,12 +30,13 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-playfair)', 'Georgia', 'serif'],
+        // display now uses the same Inter — clean grotesque, no decorative serif
+        display: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'display-xl': ['clamp(2.5rem,5vw,3.5rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'display-lg': ['clamp(2rem,4vw,2.75rem)', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
-        'display-md': ['clamp(1.5rem,3vw,2rem)', { lineHeight: '1.2', letterSpacing: '-0.015em' }],
+        'display-xl': ['clamp(2.5rem,5vw,3.5rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
+        'display-lg': ['clamp(2rem,4vw,2.75rem)', { lineHeight: '1.1', letterSpacing: '-0.025em' }],
+        'display-md': ['clamp(1.5rem,3vw,2rem)', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
         'body-lg': ['1.125rem', { lineHeight: '1.75' }],
         'body-md': ['1rem', { lineHeight: '1.7' }],
       },
