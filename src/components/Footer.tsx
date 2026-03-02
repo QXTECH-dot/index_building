@@ -1,8 +1,9 @@
 import Link from 'next/link'
-import { getBusiness, getNav } from '@/lib/site-data'
+import { getBusiness, getNav, getServicesPage } from '@/lib/site-data'
 
 const business = getBusiness()
 const navItems = getNav()
+const services = getServicesPage()
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -13,9 +14,9 @@ export function Footer() {
       <div className="h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent" aria-hidden="true" />
 
       <div className="container-site py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
           {/* Brand */}
-          <div>
+          <div className="sm:col-span-2 md:col-span-1">
             <p className="font-display font-semibold text-white text-xl tracking-tight mb-2">
               Index Building
             </p>
@@ -42,6 +43,23 @@ export function Footer() {
                 ))}
               </ul>
             </nav>
+          </div>
+
+          {/* Services */}
+          <div>
+            <p className="eyebrow mb-5">Services</p>
+            <ul className="space-y-3">
+              {services.items.map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="text-sm text-warm-400 hover:text-brand-accent transition-colors duration-300"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Contact */}
