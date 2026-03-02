@@ -35,6 +35,6 @@ export function getLogo() {
   return siteData.assets.logo
 }
 
-export const SITE_URL = 'https://indexbuilding.com.au'
-export const PRIMARY_CTA_LABEL = 'Contact Us'
+export const SITE_URL = siteData.baseUrl
+export const PRIMARY_CTA_LABEL = 'Contact us'
 export const PRIMARY_CTA_HREF = '/contact'

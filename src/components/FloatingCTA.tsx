@@ -61,8 +61,8 @@ export function FloatingCTA() {
       className={[
         'fixed bottom-6 right-4 sm:right-6 z-50',
         'flex items-center gap-3',
-        'bg-stone-900 text-white',
-        'rounded-full shadow-xl pl-4 pr-2 py-2',
+        'text-warm-900',
+        'rounded-full shadow-xl pl-4 pr-2 py-2 bg-white border border-warm-200',
         'max-w-[calc(100vw-2rem)]',
         // Safe area for iOS
         'pb-[calc(0.5rem+env(safe-area-inset-bottom,0px))]',
@@ -71,7 +71,7 @@ export function FloatingCTA() {
     >
       <Link
         href={PRIMARY_CTA_HREF}
-        className="text-sm font-medium whitespace-nowrap hover:text-stone-300 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded"
+        className="text-sm font-medium whitespace-nowrap text-warm-900 hover:text-brand-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent rounded"
         onClick={dismiss}
       >
         {PRIMARY_CTA_LABEL}
@@ -79,7 +79,7 @@ export function FloatingCTA() {
       <button
         onClick={dismiss}
         aria-label="Dismiss"
-        className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-stone-700 hover:bg-stone-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-white"
+        className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-warm-100 hover:bg-warm-200 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-accent text-warm-600"
       >
         <svg
           className="w-3 h-3"

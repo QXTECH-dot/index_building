@@ -12,33 +12,25 @@ export function PrimaryCTA({
 }: PrimaryCTAProps) {
   return (
     <section
-      className="bg-stone-900 text-white section-py"
+      className="bg-warm-900 section-py"
       aria-label="Call to action"
     >
       <div className="container-site text-center max-w-2xl mx-auto">
-        <h2 className="font-display font-semibold text-display-lg text-white mb-4">
+        {/* Decorative gold rule */}
+        <div className="flex items-center justify-center gap-4 mb-8" aria-hidden="true">
+          <span className="block h-px w-16 bg-brand-accent/40" />
+          <span className="block w-1.5 h-1.5 rounded-full bg-brand-accent" />
+          <span className="block h-px w-16 bg-brand-accent/40" />
+        </div>
+
+        <h2 className="font-display font-semibold text-display-lg text-white mb-5 tracking-tight">
           {heading}
         </h2>
-        <p className="text-stone-300 text-body-lg leading-relaxed mb-8">
+        <p className="text-warm-300/80 text-body-lg leading-relaxed mb-10 max-w-lg mx-auto">
           {body}
         </p>
-        <Link
-          href={PRIMARY_CTA_HREF}
-          className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-stone-900 text-sm font-medium rounded-btn
-          transition-all duration-150 hover:bg-stone-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white
-          active:scale-[0.98]"
-        >
+        <Link href={PRIMARY_CTA_HREF} className="btn-gold">
           {PRIMARY_CTA_LABEL}
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-            aria-hidden="true"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
         </Link>
       </div>
     </section>

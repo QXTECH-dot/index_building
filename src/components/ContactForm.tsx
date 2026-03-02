@@ -8,7 +8,6 @@ interface FormData {
   name: string
   email: string
   phone: string
-  subject: string
   message: string
 }
 
@@ -19,19 +18,15 @@ export function ContactForm() {
     name: '',
     email: '',
     phone: '',
-    subject: '',
     message: '',
   })
 
   const validate = (): boolean => {
     const newErrors: Partial<FormData> = {}
-    if (!form.name.trim()) newErrors.name = 'Name is required'
-    if (!form.email.trim()) {
-      newErrors.email = 'Email is required'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    // Match source-site behavior: fields are not marked required, but we still validate email if provided.
+    if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       newErrors.email = 'Please enter a valid email'
     }
-    if (!form.message.trim()) newErrors.message = 'Message is required'
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -58,7 +53,7 @@ export function ContactForm() {
       })
       if (res.ok) {
         setState('success')
-        setForm({ name: '', email: '', phone: '', subject: '', message: '' })
+        setForm({ name: '', email: '', phone: '', message: '' })
       } else {
         setState('error')
       }
@@ -70,17 +65,12 @@ export function ContactForm() {
   if (state === 'success') {
     return (
       <div
-        className="p-8 bg-stone-50 rounded-card border border-stone-100 text-center"
+        className="p-8 bg-warm-50 rounded-card border border-warm-200 text-center"
         role="status"
         aria-live="polite"
       >
-        <div className="w-12 h-12 rounded-full bg-stone-900 flex items-center justify-center mx-auto mb-4">
-          <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-          </svg>
-        </div>
-        <h3 className="font-display font-semibold text-xl text-stone-900 mb-2">Message Sent</h3>
-        <p className="text-stone-600 text-sm">Thank you for reaching out. We'll be in touch shortly.</p>
+        <h3 className="font-sans font-semibold text-xl text-warm-900 mb-2">Message Sent</h3>
+        <p className="text-warm-600 text-sm">Thank you for reaching out. We'll be in touch shortly.</p>
         <button
           onClick={() => setState('idle')}
           className="btn-secondary mt-6 text-sm px-5 py-2.5"
@@ -100,7 +90,7 @@ export function ContactForm() {
     >
       {state === 'error' && (
         <div
-          className="p-4 bg-red-50 border border-red-100 rounded-card text-sm text-red-700"
+          className="p-4 bg-red-50 border border-red-100 rounded-card text-sm text-red-600"
           role="alert"
           aria-live="assertive"
         >
@@ -109,18 +99,15 @@ export function ContactForm() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Field label="Name" name="name" type="text" value={form.name} onChange={handleChange} error={errors.name} required placeholder="Your name" />
-        <Field label="Email" name="email" type="email" value={form.email} onChange={handleChange} error={errors.email} required placeholder="your@email.com" />
+        <Field label="Name" name="name" type="text" value={form.name} onChange={handleChange} error={errors.name} placeholder="Name" />
+        <Field label="Phone" name="phone" type="tel" value={form.phone} onChange={handleChange} error={errors.phone} placeholder="Phone" />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Field label="Phone" name="phone" type="tel" value={form.phone} onChange={handleChange} error={errors.phone} placeholder="+61 4XX XXX XXX" />
-        <Field label="Subject" name="subject" type="text" value={form.subject} onChange={handleChange} error={errors.subject} placeholder="Project type or enquiry" />
-      </div>
+      <Field label="Email" name="email" type="email" value={form.email} onChange={handleChange} error={errors.email} placeholder="Email" />
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-stone-700 mb-1.5">
-          Message <span className="text-stone-400" aria-label="required">*</span>
+        <label htmlFor="message" className="block text-sm font-medium text-warm-700 mb-1.5">
+          Message
         </label>
         <textarea
           id="message"
@@ -128,15 +115,12 @@ export function ContactForm() {
           value={form.message}
           onChange={handleChange}
           rows={5}
-          required
-          placeholder="Tell us about your project..."
+          placeholder="Your message"
           aria-describedby={errors.message ? 'message-error' : undefined}
           aria-invalid={!!errors.message}
           className={[
-            'w-full px-4 py-3 bg-white border rounded-card text-sm text-stone-900 placeholder-stone-400',
-            'focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent',
-            'transition-all duration-150 resize-none',
-            errors.message ? 'border-red-400' : 'border-stone-200',
+            'textarea',
+            errors.message ? 'border-red-400 focus:ring-red-200/60' : '',
           ].join(' ')}
         />
         {errors.message && (
@@ -161,7 +145,7 @@ export function ContactForm() {
             Sending…
           </>
         ) : (
-          'Send Message'
+          'Submit'
         )}
       </button>
     </form>
@@ -183,7 +167,7 @@ function Field({ label, name, type, value, onChange, error, required, placeholde
   const errorId = `${name}-error`
   return (
     <div>
-      <label htmlFor={name} className="block text-sm font-medium text-stone-700 mb-1.5">
+      <label htmlFor={name} className="block text-sm font-medium text-warm-700 mb-1.5">
         {label}{required && <span className="text-stone-400 ml-0.5" aria-label="required">*</span>}
       </label>
       <input
@@ -197,10 +181,8 @@ function Field({ label, name, type, value, onChange, error, required, placeholde
         aria-describedby={error ? errorId : undefined}
         aria-invalid={!!error}
         className={[
-          'w-full px-4 py-3 bg-white border rounded-card text-sm text-stone-900 placeholder-stone-400',
-          'focus:outline-none focus:ring-2 focus:ring-stone-900 focus:border-transparent',
-          'transition-all duration-150',
-          error ? 'border-red-400' : 'border-stone-200',
+          'input',
+          error ? 'border-red-400 focus:ring-red-200/60' : '',
         ].join(' ')}
       />
       {error && (

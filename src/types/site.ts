@@ -21,12 +21,16 @@ export interface ImageAsset {
   name: string
   localPath: string
   alt: string
+  originalUrl?: string
 }
 
 export interface ServiceItem {
   name: string
+  slug: string
   description: string
   image: string | null
+  features?: string[]
+  body?: string[]
 }
 
 export interface ProjectItem {
@@ -56,7 +60,7 @@ export interface AboutPage {
   h1: string
   body: string[]
   image: string | null
-  testimonial: Testimonial
+  testimonial?: Testimonial | null
 }
 
 export interface ServicesPage {
@@ -67,12 +71,20 @@ export interface ServicesPage {
   items: ServiceItem[]
 }
 
+export interface ProjectGroup {
+  name: string
+  location?: string
+  description?: string
+  items: ProjectItem[]
+}
+
 export interface ProjectsPage {
   slug: string
   title: string
   metaDescription: string
   h1: string
   items: ProjectItem[]
+  groups?: ProjectGroup[]
 }
 
 export interface ContactPage {
@@ -80,6 +92,7 @@ export interface ContactPage {
   title: string
   metaDescription: string
   h1: string
+  image?: string | null
 }
 
 export interface SiteData {

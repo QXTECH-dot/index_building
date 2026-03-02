@@ -4,11 +4,12 @@
 
 @layer base {
   :root {
-    --background: 250 249 247;
-    --foreground: 28 25 23;
-    --muted: 120 113 108;
-    --border: 231 229 228;
-    --radius: 1rem;
+    /* Stone-gray background, charcoal text */
+    --background: 248 246 243;   /* #f8f6f3 lightest stone */
+    --foreground: 45 41 38;      /* #2d2926 charcoal */
+    --muted:      140 130 121;   /* #8c8279 stone-500 */
+    --border:     224 220 215;   /* #e0dcd7 stone-200 */
+    --radius: 0.25rem;
   }
 
   html {
@@ -19,21 +20,24 @@
   }
 
   body {
-    @apply bg-stone-50 text-stone-900 font-sans;
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    @apply font-sans antialiased;
   }
 
-  /* Remove default border-box reset that clashes with * rule */
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
-  /* Focus ring */
   :focus-visible {
-    outline: 2px solid #1c1917;
+    outline: 2px solid #c9a96e;
     outline-offset: 3px;
   }
 
-  /* Smooth image rendering */
+  ::selection {
+    background: rgba(201, 169, 110, 0.25);
+  }
+
   img {
     display: block;
     max-width: 100%;
@@ -42,52 +46,121 @@
 
 @layer components {
   .container-site {
-    @apply w-full max-w-container mx-auto px-4 sm:px-6 lg:px-8;
+    @apply w-full max-w-container mx-auto px-5 sm:px-8 lg:px-10;
   }
 
   .section-py {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32;
   }
 
   .section-py-sm {
-    @apply py-12 md:py-16;
+    @apply py-14 md:py-20;
   }
 
-  /* Heading scale system */
+  /* ── Typography — Apple SF Pro style ── */
   .h-display {
-    @apply font-display font-semibold text-display-xl text-stone-900 tracking-tight;
+    /* Heavy, tight tracking — apple.com hero headings */
+    @apply font-sans font-bold text-display-xl;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+    color: rgb(var(--foreground));
   }
 
   .h-section {
-    @apply font-display font-semibold text-display-lg text-stone-900 tracking-tight;
+    @apply font-sans font-semibold text-display-lg;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: rgb(var(--foreground));
   }
 
   .h-card {
-    @apply font-display font-medium text-display-md text-stone-900;
+    @apply font-sans font-semibold text-display-md;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: rgb(var(--foreground));
   }
 
-  /* Buttons */
+  /* Eyebrow / overline label */
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-accent;
+  }
+
+  /* Thin gold horizontal rule */
+  .divider-gold {
+    @apply block w-10 h-px bg-brand-accent;
+  }
+
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-      bg-stone-900 text-white text-sm font-medium tracking-wide rounded-btn
-      transition-colors duration-150
-      hover:bg-stone-700
-      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:ring-offset-2
-      active:scale-[0.98] select-none;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+      bg-warm-900 text-white text-[0.8125rem] font-semibold tracking-[0.08em] uppercase rounded-btn
+      shadow-sm
+      transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]
+      hover:bg-brand-accent hover:text-warm-900 hover:shadow-[0_4px_20px_rgba(201,169,110,0.35)] hover:-translate-y-px
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 focus-visible:ring-offset-2
+      active:translate-y-0 active:scale-[0.99] select-none;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+      bg-brand-accent text-warm-900 text-[0.8125rem] font-semibold tracking-[0.08em] uppercase rounded-btn
+      shadow-sm
+      transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]
+      hover:bg-brand-accent-light hover:shadow-[0_4px_20px_rgba(201,169,110,0.4)] hover:-translate-y-px
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2 focus-visible:ring-offset-warm-900
+      active:translate-y-0 active:scale-[0.99] select-none;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3
-      bg-transparent text-stone-900 text-sm font-medium tracking-wide rounded-btn border border-stone-300
-      transition-colors duration-150
-      hover:bg-stone-100 hover:border-stone-400
-      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-900 focus-visible:ring-offset-2
-      active:scale-[0.98] select-none;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+      bg-transparent text-warm-900 text-[0.8125rem] font-semibold tracking-[0.08em] uppercase rounded-btn border border-warm-300
+      transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]
+      hover:border-brand-accent/70 hover:text-brand-accent hover:-translate-y-px
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 focus-visible:ring-offset-2
+      active:translate-y-0 active:scale-[0.99] select-none;
   }
 
-  /* Card */
+  .btn-invert {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+      bg-white text-warm-900 text-[0.8125rem] font-semibold tracking-[0.08em] uppercase rounded-btn
+      shadow-sm
+      transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]
+      hover:bg-brand-accent hover:text-warm-900 hover:shadow-[0_4px_20px_rgba(201,169,110,0.35)] hover:-translate-y-px
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-900
+      active:translate-y-0 active:scale-[0.99] select-none;
+  }
+
+  /* Ghost: used on dark warm backgrounds */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5
+      bg-transparent text-white text-[0.8125rem] font-semibold tracking-[0.08em] uppercase rounded-btn border border-white/25
+      transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)]
+      hover:border-brand-accent/70 hover:text-brand-accent hover:-translate-y-px
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-900
+      active:translate-y-0 active:scale-[0.99] select-none;
+  }
+
+  /* ── Card ── */
   .card {
-    @apply bg-white rounded-card overflow-hidden;
+    @apply bg-white rounded-card overflow-hidden
+      border border-warm-200/80
+      shadow-card
+      transition-shadow duration-300;
+  }
+
+  /* ── Form inputs ── */
+  .input {
+    @apply w-full px-4 py-3.5 bg-white border border-warm-200 rounded-btn text-sm placeholder-warm-400
+      transition-all duration-300
+      focus:outline-none focus:ring-2 focus:ring-brand-accent/60 focus:border-warm-200;
+    color: rgb(var(--foreground));
+  }
+
+  .textarea {
+    @apply w-full px-4 py-3.5 bg-white border border-warm-200 rounded-btn text-sm placeholder-warm-400
+      transition-all duration-300 resize-none
+      focus:outline-none focus:ring-2 focus:ring-brand-accent/60 focus:border-warm-200;
+    color: rgb(var(--foreground));
   }
 }
 

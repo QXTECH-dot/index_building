@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { PrimaryCTA } from '@/components/PrimaryCTA'
 import { GalleryEditorial } from '@/components/GalleryEditorial'
 import { SectionReveal } from '@/components/SectionReveal'
 import { getProjectsPage, SITE_URL } from '@/lib/site-data'
@@ -18,64 +17,68 @@ export const metadata: Metadata = {
 }
 
 export default function ProjectsPage() {
+  const groups = projectsPage.groups ?? []
+
   return (
     <>
       {/* Page header */}
-      <div className="bg-stone-900 pt-32 pb-16">
+      <div className="bg-warm-50 pt-14 pb-16 border-b border-warm-200">
         <div className="container-site">
           <SectionReveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-3">
-              Portfolio
-            </p>
-            <h1 className="font-display font-semibold text-display-xl text-white tracking-tight">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="block w-8 h-px bg-brand-accent flex-shrink-0" aria-hidden="true" />
+              <p className="eyebrow">Our Work</p>
+            </div>
+            <h1 className="font-display font-semibold text-display-xl text-warm-900 tracking-tight max-w-2xl mb-4">
               {projectsPage.h1}
             </h1>
-            <p className="text-stone-400 text-body-lg mt-4 max-w-xl">
-              A curated selection of construction and renovation projects completed across Canberra, ACT.
-            </p>
+            {projectsPage.metaDescription && (
+              <p className="text-warm-600 text-base max-w-xl leading-relaxed">
+                {projectsPage.metaDescription}
+              </p>
+            )}
           </SectionReveal>
         </div>
       </div>
 
-      {/* Gallery */}
-      <section className="section-py bg-stone-50" aria-label="Project gallery">
-        <div className="container-site">
-          <GalleryEditorial projects={projectsPage.items} />
-        </div>
-      </section>
-
-      {/* Project list */}
-      <section className="section-py bg-white" aria-labelledby="project-list-heading">
-        <div className="container-site">
-          <SectionReveal>
-            <h2 id="project-list-heading" className="h-card text-stone-900 mb-8">
-              All Projects
-            </h2>
-          </SectionReveal>
-          <ul className="divide-y divide-stone-100" role="list">
-            {projectsPage.items.map((project, i) => (
-              <SectionReveal key={project.title} as="li" delay={i * 30}>
-                <div className="py-5 flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="font-medium text-stone-900 mb-1">{project.title}</h3>
-                    {project.description && (
-                      <p className="text-stone-500 text-sm">{project.description}</p>
-                    )}
+      {/* Project groups */}
+      {groups.map((group, groupIdx) => (
+        <section
+          key={group.name}
+          className={`section-py ${groupIdx % 2 === 0 ? 'bg-white' : 'bg-warm-50'}`}
+          aria-label={group.name}
+        >
+          <div className="container-site">
+            <SectionReveal>
+              <div className="flex items-end justify-between gap-6 mb-10">
+                <div className="max-w-xl">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="block w-6 h-px bg-brand-accent flex-shrink-0" aria-hidden="true" />
+                    <p className="eyebrow text-warm-400">Project 0{groupIdx + 1}</p>
                   </div>
-                  <span className="flex-shrink-0 text-xs text-stone-400 mt-0.5">
-                    Canberra, ACT
-                  </span>
+                  <h2 className="h-card text-warm-900 mb-2">{group.name}</h2>
+                  {group.location && (
+                    <p className="text-warm-500 text-sm mb-3">{group.location}</p>
+                  )}
+                  {group.description && (
+                    <p className="text-warm-600 text-sm leading-relaxed max-w-md">
+                      {group.description}
+                    </p>
+                  )}
                 </div>
-              </SectionReveal>
-            ))}
-          </ul>
-        </div>
-      </section>
+                <div className="hidden md:flex items-center gap-4 shrink-0">
+                  <div className="h-px w-16 bg-brand-accent/20" aria-hidden="true" />
+                  <p className="eyebrow text-warm-400 whitespace-nowrap">
+                    {group.items.filter(p => p.image).length} Photos
+                  </p>
+                </div>
+              </div>
+            </SectionReveal>
 
-      <PrimaryCTA
-        heading="Have a Project in Mind?"
-        body="We'd love to add your project to our portfolio. Contact us to discuss your construction or renovation needs."
-      />
+            <GalleryEditorial projects={group.items} />
+          </div>
+        </section>
+      ))}
     </>
   )
 }

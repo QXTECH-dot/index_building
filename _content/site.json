@@ -1,18 +1,18 @@
 {
-  "crawledAt": "2026-02-26T03:49:39.899Z",
-  "baseUrl": "https://indexbuilding.com.au",
+  "crawledAt": "2026-02-27T03:51:22.928Z",
+  "baseUrl": "http://www.indexbuilding.com.au",
   "business": {
-    "name": "Index Building",
-    "tagline": "Canberra's trusted construction and renovation specialists",
-    "address": "12/233 Flemington Road, Franklin ACT 2913",
-    "phone": "+61 416 217 919",
+    "name": "Index Building Group",
+    "tagline": "Built on Trust. Focused on You.",
+    "address": "",
+    "phone": "",
     "email": "stephen@indexbuilding.com.au",
     "hours": {
-      "weekdays": "09:00 AM – 6:30 PM",
-      "saturday": "Closed",
-      "sunday": "Closed"
+      "weekdays": "",
+      "saturday": "",
+      "sunday": ""
     },
-    "area": "Canberra, ACT, Australia"
+    "area": "Canberra and surrounding regions"
   },
   "nav": [
     {
@@ -20,7 +20,7 @@
       "href": "/"
     },
     {
-      "label": "About",
+      "label": "About us",
       "href": "/about"
     },
     {
@@ -32,226 +32,519 @@
       "href": "/projects"
     },
     {
-      "label": "Contact",
+      "label": "Contact us",
       "href": "/contact"
     }
   ],
   "pages": {
     "home": {
       "slug": "home",
-      "title": "Index Building – Canberra Construction & Renovation",
-      "metaDescription": "Index Building is Canberra's trusted construction and renovation firm. We specialize in house construction, shop renovation, flooring installation, and repairs across the ACT.",
-      "h1": "Quality Construction & Renovation in Canberra",
-      "heroImage": "/assets/images/bg_header.jpg",
+      "title": "INDEX BUILDING GROUP",
+      "metaDescription": "Index Building Group — your trusted local builder serving Canberra and surrounding regions. Built on trust, focused on you.",
+      "h1": "Built on Trust. Focused on You.",
+      "heroImage": "/assets/www/__static/ff4a4d04-65f6-4719-ad40-74ab17d1759f/image_desktop.webp",
       "heroImages": [
-        "/assets/images/bg_header.jpg",
-        "/assets/images/house.jpg",
-        "/assets/images/bel.jpg",
-        "/assets/images/con.jpg"
+        "/assets/www/__static/ff4a4d04-65f6-4719-ad40-74ab17d1759f/image_desktop.webp",
+        "/assets/www/__static/c0a20339-99b4-4c58-8cd4-5fc80ee41695/image_desktop.webp",
+        "/assets/www/__static/4192dfbb-2dd6-477e-bb7e-efb294974179/image_desktop.webp",
+        "/assets/www/__static/ff4a4d04-65f6-4719-ad40-74ab17d1759f/image_desktop.webp"
       ]
     },
     "about": {
       "slug": "about",
-      "title": "About Us – Index Building Canberra",
-      "metaDescription": "Learn about Index Building – a premier construction and renovation firm based in Canberra dedicated to quality craftsmanship and customer satisfaction.",
-      "h1": "About Us",
+      "title": "About us",
+      "metaDescription": "A construction company that puts people first. Founded by Stephen Zhou, a licensed builder with over a decade of hands-on experience delivering quality projects across the ACT.",
+      "h1": "About us",
       "body": [
-        "Building Index is a premier construction and renovation firm based in Canberra, dedicated to transforming residential spaces with precision and care. With a strong focus on quality and customer satisfaction, we specialize in house construction, renovations, flooring installations, and comprehensive house repairs.",
-        "Our team of skilled professionals brings years of experience and a deep commitment to excellence in every project we undertake. We work closely with our clients to understand their vision and ensure that every detail reflects their personal style and needs.",
-        "At Building Index, we focus on creating functional, stylish, and durable living spaces that reflect our clients' unique needs and tastes. With a commitment to excellence and attention to detail, we ensure every project is completed to the highest standards.",
-        "Trust us to be your partner in building and enhancing your home, providing solutions that stand the test of time."
+        "Founded by Stephen Zhou, a licensed builder with over a decade of hands-on experience, Index Building Group was created with one goal: to make construction feel simple, transparent, and personal. Since starting his building career in 2010, Stephen has proudly delivered high-quality projects for families and businesses across the ACT and beyond, always with a hands-on approach and a commitment to doing things right.",
+        "We understand that construction can feel overwhelming, so we make it easy. We hold your hand through the entire process, from design and approvals to final handover, ensuring your ideas are heard, your budget respected, and your project delivered on time.",
+        "Whether you're renovating your family home, upgrading a commercial space, or starting fresh with a new build, we're here to guide you every step of the way — bringing structure, clarity, and direction to your building journey so you always know what's next and never feel left in the dark."
       ],
-      "image": "/assets/images/about.jpg",
-      "testimonial": {
-        "quote": "Thank you IndexBuilding, you are dedicated, professional and efficient. Thank you for your hard work.",
-        "attribution": "A customer from Canberra"
-      }
+      "image": "/assets/www/__static/c09b06cc-5486-4fb7-aadb-27137dd86086/image_desktop.webp",
+      "testimonial": null
     },
     "services": {
       "slug": "services",
-      "title": "Our Services – Index Building Canberra",
-      "metaDescription": "Index Building offers expert shop renovation, house construction, flooring installation, and house repair services across Canberra, ACT.",
-      "h1": "Our Services",
+      "title": "Our Services — Index Building Group",
+      "metaDescription": "From new home builds to renovations and knockdown rebuilds, Index Building Group delivers quality residential construction across Canberra and the ACT.",
+      "h1": "What we build",
       "items": [
         {
-          "name": "Shop Renovation",
-          "description": "We specialize in transforming commercial spaces into modern, functional, and aesthetically pleasing environments. Our expert team handles every aspect of the renovation process, from initial design consultation to the final touches. We ensure that your shop reflects your brand's identity while creating an inviting atmosphere for customers.",
-          "image": "/assets/images/bel.jpg"
+          "name": "New Home Construction",
+          "slug": "new-home-construction",
+          "description": "Building your dream home from the ground up. We manage the entire process — from initial design and council approvals through to final handover — so you can focus on the excitement of what’s ahead. Every new build is treated with the same care and attention we’d give our own home.",
+          "image": "/assets/www/__static/008687f1-7c0b-42d3-92cc-0495832c7e49/image_laptop.webp",
+          "features": [
+            "Full project management from design to handover",
+            "Council approval and DA lodgement assistance",
+            "Licensed and insured trades throughout",
+            "Transparent fixed-price contracts",
+            "Regular progress updates and site access",
+            "Structural warranty on completed work"
+          ],
+          "body": [
+            "Building a new home is one of the biggest investments you’ll ever make — and one of the most exciting. At Index Building Group, we take that responsibility seriously. Founded by Stephen Zhou, a licensed builder with over a decade of hands-on experience across the ACT, we’ve built a reputation for delivering new homes that are structurally sound, beautifully finished, and completed on time.",
+            "Our new home construction service covers the full lifecycle of your build. We start by working with you to understand your vision, budget, and timeline. From there, we coordinate design documentation, lodge your development application, and manage every trade on site — from excavation and slab through to lock-up, fit-out, and final handover. You’ll always know where your project is at.",
+            "We build across Canberra and the ACT, including established suburbs and new estates like Denman Prospect, Throsby, Taylor, and Whitlam. Whether you’re building your first home, an investment property, or a forever home, we bring the same level of care and precision to every project.",
+            "What sets us apart is our commitment to honest communication. We don’t overpromise. We give you realistic timelines, clear cost breakdowns, and straight answers. If something changes on site, you’ll hear about it from us before it becomes a problem."
+          ]
         },
         {
-          "name": "House Construction",
-          "description": "We specialize in building custom homes that blend quality craftsmanship with innovative design. From the initial planning and architectural design to the final construction, our experienced team is committed to delivering your dream home on time and within budget. We work closely with you to understand your vision and ensure that every detail reflects your personal style and needs.",
-          "image": "/assets/images/house.jpg"
+          "name": "Home Extensions",
+          "slug": "home-extensions",
+          "description": "Need more space? We design and build seamless extensions that feel like they were always part of your home. Whether it’s an extra bedroom, a larger living area, or a second storey addition, we deliver results that are structurally sound, beautifully finished, and built to last.",
+          "image": "/assets/www/__static/ba68aaa6-69dd-438e-865a-2583e71eefb1/image_laptop.webp",
+          "features": [
+            "Ground floor and second storey additions",
+            "Seamless integration with existing structure",
+            "Structural engineering and council approvals",
+            "Matching materials and finishes to existing home",
+            "Minimal disruption to your daily routine",
+            "Full project management and trades coordination"
+          ],
+          "body": [
+            "Your home should grow with you. Whether your family is expanding, you’re working from home and need a dedicated office, or you simply want more living space, a well-designed home extension can transform the way you live — without the cost and upheaval of moving.",
+            "Index Building Group specialises in home extensions across Canberra and the ACT. We handle everything from the initial design brief through to council approvals, construction, and final inspection. Our team ensures your extension integrates seamlessly with your existing home — matching structural systems, exterior materials, and interior finishes so the addition feels like it was always there.",
+            "We build all types of extensions: rear additions, side additions, second storey additions, garage conversions, and granny flat attachments. Every project is different, and we take the time to understand your specific needs before we start. We’ll talk through your options, outline the approval pathway, and give you a clear picture of what’s involved before any work begins.",
+            "Living at home during a renovation can be stressful. We work hard to minimise disruption — keeping the site clean, communicating clearly about what’s happening each week, and respecting your space throughout the build."
+          ]
         },
         {
-          "name": "Flooring Installation",
-          "description": "We offer professional flooring installation and renovation services to enhance the beauty and functionality of your home or commercial space. Whether you're looking for hardwood, laminate, tile, or vinyl flooring, our expert team provides high-quality craftsmanship and attention to detail.",
-          "image": "/assets/images/con.jpg"
+          "name": "Renovation & Refurbishment",
+          "slug": "renovation-refurbishment",
+          "description": "Transform your existing space without the hassle. From kitchen and bathroom upgrades to full interior refurbishments, we breathe new life into homes and commercial spaces with minimal disruption to your day-to-day life. Quality finishes, honest timelines, no surprises.",
+          "image": "/assets/www/__static/7fca1ed8-db3c-441c-a4d3-6a9a0da0a3a6/image_laptop.webp",
+          "features": [
+            "Kitchen and bathroom renovations",
+            "Full interior and exterior refurbishments",
+            "Flooring, tiling, painting and joinery",
+            "Structural modifications and wall removals",
+            "Heritage and period home experience",
+            "Commercial fit-outs and refurbishments"
+          ],
+          "body": [
+            "A well-executed renovation can completely transform how you experience your home. Whether you’re updating a tired kitchen, opening up a dark living area, or giving your entire property a fresh start, Index Building Group delivers renovations that are thoughtfully planned and beautifully built.",
+            "We work on all types of residential and commercial renovations across Canberra and the ACT. Our team is experienced in both modern refurbishments and sensitive upgrades to older properties, including period and heritage homes. We understand the challenges these projects present and we approach each one with care.",
+            "Our renovation process is straightforward. We start with a detailed scope of works so you know exactly what’s included and what it will cost. We coordinate all licensed trades — plumbers, electricians, tilers, painters — and manage the schedule to keep your project moving efficiently. You won’t be chasing subcontractors or wondering what’s happening next.",
+            "We believe in quality finishes that stand the test of time. We don’t cut corners on materials or workmanship, because a renovation should add lasting value to your property — not just look good for six months. Every job we complete is one we’re proud to put our name on."
+          ]
         },
         {
-          "name": "House Repairs",
-          "description": "From minor fixes to major structural repairs, our team handles all aspects of residential maintenance and repair. We ensure your property remains safe, functional, and well-maintained with quality workmanship on every job.",
-          "image": "/assets/images/house.jpg"
+          "name": "Knockdown & Rebuild",
+          "slug": "knockdown-rebuild",
+          "description": "Love the location but not the house? A knockdown rebuild is often the smartest and most cost-effective way to get the home you really want. We handle the full process — demolition, approvals, design coordination, and construction — delivering a brand new home on the block you already own.",
+          "image": "/assets/www/__static/c30d1c5a-eac9-4650-a37c-a9af4503b50f/image_laptop.webp",
+          "features": [
+            "Full demolition and site clearing",
+            "Development application and approvals management",
+            "New custom home construction on existing block",
+            "Temporary accommodation advice and planning",
+            "Single point of contact for the entire project",
+            "Established neighbourhood — no waiting for infrastructure"
+          ],
+          "body": [
+            "Sometimes the best way to get the home you want is to start fresh. If you love your street, your neighbours, and your block — but your current home no longer meets your needs — a knockdown rebuild gives you a brand new house in a location you already know and love.",
+            "Index Building Group manages the complete knockdown rebuild process in Canberra and the ACT. From the initial demolition permit and asbestos testing through to DA approval, design coordination, and full construction, we handle every step. You deal with one builder, one contract, and one point of contact throughout.",
+            "A knockdown rebuild is often more cost-effective than a major renovation, particularly for older homes with significant structural issues or outdated layouts. You also avoid the uncertainty that comes with renovating — hidden problems, unexpected costs, and compromises forced by existing structure. With a knockdown rebuild, you design exactly what you want from the ground up.",
+            "We understand that a knockdown rebuild is a significant decision, and we’re here to help you think it through carefully. We’ll walk you through the approval process specific to your property in the ACT, outline realistic timelines, and give you an honest assessment of costs before you commit to anything."
+          ]
         }
       ]
     },
     "projects": {
       "slug": "projects",
-      "title": "Our Projects – Index Building Canberra",
-      "metaDescription": "Explore Index Building's portfolio of completed projects in Canberra – house construction, commercial renovations, flooring, and more.",
+      "title": "Projects",
+      "metaDescription": "A showcase of residential and commercial construction projects delivered by Index Building Group across Canberra and the ACT.",
       "h1": "Our Projects",
+      "groups": [
+        {
+          "name": "17 Medina St, Denman Prospect",
+          "location": "Denman Prospect, ACT",
+          "description": "New residential construction in the Denman Prospect estate — delivering quality craftsmanship from slab to lock-up.",
+          "items": [
+            { "title": "", "description": "", "image": "/assets/www/__static/008687f1-7c0b-42d3-92cc-0495832c7e49/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/c5bc6ce6-8b2c-4d3d-a458-b59ecdac690a/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/665b9a0e-fcf2-4e3d-b52e-944b2549282c/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/efc05f8c-fc48-4c6c-8c46-b0c3e62b89bd/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/ee743797-3819-4b35-b662-6cb133b6f116/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/6c57b996-0055-4427-b81e-707e41c35a8d/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/7604e001-ba55-41fe-b2f7-1320b873fc56/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/ba68aaa6-69dd-438e-865a-2583e71eefb1/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/77db5987-44dc-406c-9a03-0d61e526eb13/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/ba07f6d6-20fa-4298-8555-ca3fcdca1df5/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/eee1d1e5-738b-4e2d-974b-f8ce1cc75784/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/0b34ac74-4e14-4954-808c-ed23efb6d93e/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/d8fff527-bd43-44b0-ab13-1b14b1ffa958/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/92b8f046-d3d7-4cac-aaa4-1cfac6768121/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/c30d1c5a-eac9-4650-a37c-a9af4503b50f/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/71eaf078-171d-4daa-86a7-10d6f8f8b327/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/72cbbf8b-85c1-42a2-a9f0-f5f56014c81a/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/379a6c3e-2285-4146-a253-ee6ca463c73c/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/95c183b5-c208-46c6-99cf-350110fe9c82/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/a3b28de2-2cf0-46e7-a715-73f9f1b2f3d8/image_laptop.webp" }
+          ]
+        },
+        {
+          "name": "Residential Project",
+          "location": "Canberra, ACT",
+          "description": "A residential build and renovation project showcasing our attention to detail and quality finish.",
+          "items": [
+            { "title": "", "description": "", "image": "/assets/www/__static/7fca1ed8-db3c-441c-a4d3-6a9a0da0a3a6/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/bfffedaa-1cae-4e06-901a-ae91bd382e05/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/f5a80c3c-6665-414e-9c2d-f5305756453d/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/dd024a2f-0000-4d8c-8611-45774555aad2/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/22497c09-b3c1-493b-8468-99a14683a8a7/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/e164030a-5bed-42aa-9569-f5787b500313/image_laptop.webp" },
+            { "title": "", "description": "", "image": "/assets/www/__static/9e287316-33cc-4d7f-bc1a-d83ed89dc6b7/image_laptop.webp" }
+          ]
+        }
+      ],
       "items": [
         {
-          "title": "Whitlam New Project – Anna and Tony's House",
-          "description": "New home construction in the Whitlam estate, Canberra.",
-          "image": "/assets/images/xhs-whitlam-1.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/008687f1-7c0b-42d3-92cc-0495832c7e49/image_laptop.webp"
         },
         {
-          "title": "Belconnen Fresh Market",
-          "description": "Commercial shop renovation at Belconnen Fresh Market, Canberra.",
-          "image": "/assets/images/xhs-belconnen-2.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/c5bc6ce6-8b2c-4d3d-a458-b59ecdac690a/image_laptop.webp"
         },
         {
-          "title": "Downer Granny Flat",
-          "description": "Granny flat construction in Downer, Canberra.",
-          "image": "/assets/images/house.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/665b9a0e-fcf2-4e3d-b52e-944b2549282c/image_laptop.webp"
         },
         {
-          "title": "Denman Phase II – First Electrified Home",
-          "description": "The first fully electrified house in Denman Phase II, Canberra.",
-          "image": "/assets/images/xhs-denman-1.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/efc05f8c-fc48-4c6c-8c46-b0c3e62b89bd/image_laptop.webp"
         },
         {
-          "title": "Kaleen Granny Flat",
-          "description": "Backyard granny flat addition in Kaleen, Canberra.",
-          "image": "/assets/images/portfolio-img5.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/ee743797-3819-4b35-b662-6cb133b6f116/image_laptop.webp"
         },
         {
-          "title": "Whitlam Project Groundbreaking",
-          "description": "Construction commencement for a new residential build in Whitlam.",
-          "image": "/assets/images/xhs-whitlam-groundbreaking.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/6c57b996-0055-4427-b81e-707e41c35a8d/image_laptop.webp"
         },
         {
-          "title": "Garage Door Installation",
-          "description": "Residential garage door installation, Canberra.",
-          "image": "/assets/images/xhs-garage-door.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/7604e001-ba55-41fe-b2f7-1320b873fc56/image_laptop.webp"
         },
         {
-          "title": "Decking Construction",
-          "description": "Outdoor decking construction and renovation.",
-          "image": "/assets/images/con.jpg"
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/ba68aaa6-69dd-438e-865a-2583e71eefb1/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/77db5987-44dc-406c-9a03-0d61e526eb13/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/ba07f6d6-20fa-4298-8555-ca3fcdca1df5/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/eee1d1e5-738b-4e2d-974b-f8ce1cc75784/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/0b34ac74-4e14-4954-808c-ed23efb6d93e/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/d8fff527-bd43-44b0-ab13-1b14b1ffa958/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/92b8f046-d3d7-4cac-aaa4-1cfac6768121/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/c30d1c5a-eac9-4650-a37c-a9af4503b50f/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/71eaf078-171d-4daa-86a7-10d6f8f8b327/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/72cbbf8b-85c1-42a2-a9f0-f5f56014c81a/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/379a6c3e-2285-4146-a253-ee6ca463c73c/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/95c183b5-c208-46c6-99cf-350110fe9c82/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/a3b28de2-2cf0-46e7-a715-73f9f1b2f3d8/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/7fca1ed8-db3c-441c-a4d3-6a9a0da0a3a6/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/bfffedaa-1cae-4e06-901a-ae91bd382e05/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/f5a80c3c-6665-414e-9c2d-f5305756453d/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/dd024a2f-0000-4d8c-8611-45774555aad2/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/22497c09-b3c1-493b-8468-99a14683a8a7/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/e164030a-5bed-42aa-9569-f5787b500313/image_laptop.webp"
+        },
+        {
+          "title": "",
+          "description": "",
+          "image": "/assets/www/__static/9e287316-33cc-4d7f-bc1a-d83ed89dc6b7/image_laptop.webp"
         }
       ]
     },
     "contact": {
       "slug": "contact",
-      "title": "Contact Us – Index Building Canberra",
-      "metaDescription": "Get in touch with Index Building for your construction and renovation project in Canberra. Call +61 416 217 919 or email stephen@indexbuilding.com.au.",
-      "h1": "Contact Us"
+      "title": "Contact us",
+      "metaDescription": "",
+      "h1": "Contact us",
+      "image": "/assets/www/__static/46e8ba96-e90c-4563-8c32-b16ec40083a0/image_desktop.webp"
     }
   },
   "assets": {
-    "logo": "/assets/images/logo.png",
+    "logo": "/assets/www/__static/jdj5jdewjhfdme5obgu0tw1zqu5ynnnd/Image_20251021194342_27_1.webp",
     "images": [
       {
-        "name": "logo.png",
-        "localPath": "/assets/images/logo.png",
-        "alt": "Index Building logo"
+        "name": "Image_20251021194342_27_1.webp",
+        "localPath": "/assets/www/__static/jdj5jdewjhfdme5obgu0tw1zqu5ynnnd/Image_20251021194342_27_1.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/jdj5jdewjhfdme5obgu0tw1zqu5ynnnd/Image_20251021194342_27_1"
       },
       {
-        "name": "bel.jpg",
-        "localPath": "/assets/images/bel.jpg",
-        "alt": "Belconnen Fresh Market renovation"
+        "name": "image_desktop.webp",
+        "localPath": "/assets/www/__static/ff4a4d04-65f6-4719-ad40-74ab17d1759f/image_desktop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/ff4a4d04-65f6-4719-ad40-74ab17d1759f/image_desktop"
       },
       {
-        "name": "house.jpg",
-        "localPath": "/assets/images/house.jpg",
-        "alt": "House construction project"
+        "name": "image_desktop.webp",
+        "localPath": "/assets/www/__static/c0a20339-99b4-4c58-8cd4-5fc80ee41695/image_desktop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/c0a20339-99b4-4c58-8cd4-5fc80ee41695/image_desktop"
       },
       {
-        "name": "con.jpg",
-        "localPath": "/assets/images/con.jpg",
-        "alt": "Construction and flooring project"
+        "name": "image_desktop.webp",
+        "localPath": "/assets/www/__static/4192dfbb-2dd6-477e-bb7e-efb294974179/image_desktop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/4192dfbb-2dd6-477e-bb7e-efb294974179/image_desktop"
       },
       {
-        "name": "about.jpg",
-        "localPath": "/assets/images/about.jpg",
-        "alt": "Index Building team"
+        "name": "image_desktop.webp",
+        "localPath": "/assets/www/__static/c09b06cc-5486-4fb7-aadb-27137dd86086/image_desktop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/c09b06cc-5486-4fb7-aadb-27137dd86086/image_desktop"
       },
       {
-        "name": "bg_header.jpg",
-        "localPath": "/assets/images/bg_header.jpg",
-        "alt": "Index Building hero background"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/008687f1-7c0b-42d3-92cc-0495832c7e49/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/008687f1-7c0b-42d3-92cc-0495832c7e49/image_laptop"
       },
       {
-        "name": "portfolio-img1.jpg",
-        "localPath": "/assets/images/portfolio-img1.jpg",
-        "alt": "Whitlam new project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/c5bc6ce6-8b2c-4d3d-a458-b59ecdac690a/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/c5bc6ce6-8b2c-4d3d-a458-b59ecdac690a/image_laptop"
       },
       {
-        "name": "portfolio-img2.jpg",
-        "localPath": "/assets/images/portfolio-img2.jpg",
-        "alt": "Construction project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/665b9a0e-fcf2-4e3d-b52e-944b2549282c/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/665b9a0e-fcf2-4e3d-b52e-944b2549282c/image_laptop"
       },
       {
-        "name": "portfolio-img3.jpg",
-        "localPath": "/assets/images/portfolio-img3.jpg",
-        "alt": "Belconnen Fresh Market project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/efc05f8c-fc48-4c6c-8c46-b0c3e62b89bd/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/efc05f8c-fc48-4c6c-8c46-b0c3e62b89bd/image_laptop"
       },
       {
-        "name": "portfolio-img4.jpg",
-        "localPath": "/assets/images/portfolio-img4.jpg",
-        "alt": "Denman project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/ee743797-3819-4b35-b662-6cb133b6f116/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/ee743797-3819-4b35-b662-6cb133b6f116/image_laptop"
       },
       {
-        "name": "portfolio-img5.jpg",
-        "localPath": "/assets/images/portfolio-img5.jpg",
-        "alt": "Renovation project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/6c57b996-0055-4427-b81e-707e41c35a8d/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/6c57b996-0055-4427-b81e-707e41c35a8d/image_laptop"
       },
       {
-        "name": "portfolio-img6.jpg",
-        "localPath": "/assets/images/portfolio-img6.jpg",
-        "alt": "Whitlam project construction start"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/7604e001-ba55-41fe-b2f7-1320b873fc56/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/7604e001-ba55-41fe-b2f7-1320b873fc56/image_laptop"
       },
       {
-        "name": "portfolio-img7.jpg",
-        "localPath": "/assets/images/portfolio-img7.jpg",
-        "alt": "Building project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/ba68aaa6-69dd-438e-865a-2583e71eefb1/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/ba68aaa6-69dd-438e-865a-2583e71eefb1/image_laptop"
       },
       {
-        "name": "portfolio-img8.jpg",
-        "localPath": "/assets/images/portfolio-img8.jpg",
-        "alt": "Construction project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/77db5987-44dc-406c-9a03-0d61e526eb13/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/77db5987-44dc-406c-9a03-0d61e526eb13/image_laptop"
       },
       {
-        "name": "xhs-whitlam-1.jpg",
-        "localPath": "/assets/images/xhs-whitlam-1.jpg",
-        "alt": "Whitlam new home project"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/ba07f6d6-20fa-4298-8555-ca3fcdca1df5/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/ba07f6d6-20fa-4298-8555-ca3fcdca1df5/image_laptop"
       },
       {
-        "name": "xhs-belconnen-2.jpg",
-        "localPath": "/assets/images/xhs-belconnen-2.jpg",
-        "alt": "Belconnen Fresh Market, Canberra"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/eee1d1e5-738b-4e2d-974b-f8ce1cc75784/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/eee1d1e5-738b-4e2d-974b-f8ce1cc75784/image_laptop"
       },
       {
-        "name": "xhs-denman-1.jpg",
-        "localPath": "/assets/images/xhs-denman-1.jpg",
-        "alt": "First house in Denman Phase II to be electrified"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/0b34ac74-4e14-4954-808c-ed23efb6d93e/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/0b34ac74-4e14-4954-808c-ed23efb6d93e/image_laptop"
       },
       {
-        "name": "xhs-garage-door.jpg",
-        "localPath": "/assets/images/xhs-garage-door.jpg",
-        "alt": "Garage door installation, Canberra"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/d8fff527-bd43-44b0-ab13-1b14b1ffa958/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/d8fff527-bd43-44b0-ab13-1b14b1ffa958/image_laptop"
       },
       {
-        "name": "xhs-whitlam-groundbreaking.jpg",
-        "localPath": "/assets/images/xhs-whitlam-groundbreaking.jpg",
-        "alt": "Whitlam project groundbreaking ceremony"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/92b8f046-d3d7-4cac-aaa4-1cfac6768121/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/92b8f046-d3d7-4cac-aaa4-1cfac6768121/image_laptop"
       },
       {
-        "name": "xhs-img3.jpg",
-        "localPath": "/assets/images/xhs-img3.jpg",
-        "alt": "Building project Canberra"
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/c30d1c5a-eac9-4650-a37c-a9af4503b50f/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/c30d1c5a-eac9-4650-a37c-a9af4503b50f/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/71eaf078-171d-4daa-86a7-10d6f8f8b327/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/71eaf078-171d-4daa-86a7-10d6f8f8b327/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/72cbbf8b-85c1-42a2-a9f0-f5f56014c81a/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/72cbbf8b-85c1-42a2-a9f0-f5f56014c81a/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/379a6c3e-2285-4146-a253-ee6ca463c73c/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/379a6c3e-2285-4146-a253-ee6ca463c73c/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/95c183b5-c208-46c6-99cf-350110fe9c82/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/95c183b5-c208-46c6-99cf-350110fe9c82/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/a3b28de2-2cf0-46e7-a715-73f9f1b2f3d8/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/a3b28de2-2cf0-46e7-a715-73f9f1b2f3d8/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/7fca1ed8-db3c-441c-a4d3-6a9a0da0a3a6/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/7fca1ed8-db3c-441c-a4d3-6a9a0da0a3a6/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/bfffedaa-1cae-4e06-901a-ae91bd382e05/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/bfffedaa-1cae-4e06-901a-ae91bd382e05/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/f5a80c3c-6665-414e-9c2d-f5305756453d/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/f5a80c3c-6665-414e-9c2d-f5305756453d/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/dd024a2f-0000-4d8c-8611-45774555aad2/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/dd024a2f-0000-4d8c-8611-45774555aad2/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/22497c09-b3c1-493b-8468-99a14683a8a7/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/22497c09-b3c1-493b-8468-99a14683a8a7/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/e164030a-5bed-42aa-9569-f5787b500313/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/e164030a-5bed-42aa-9569-f5787b500313/image_laptop"
+      },
+      {
+        "name": "image_laptop.webp",
+        "localPath": "/assets/www/__static/9e287316-33cc-4d7f-bc1a-d83ed89dc6b7/image_laptop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/9e287316-33cc-4d7f-bc1a-d83ed89dc6b7/image_laptop"
+      },
+      {
+        "name": "image_desktop.webp",
+        "localPath": "/assets/www/__static/46e8ba96-e90c-4563-8c32-b16ec40083a0/image_desktop.webp",
+        "alt": "",
+        "originalUrl": "http://www.indexbuilding.com.au/__static/46e8ba96-e90c-4563-8c32-b16ec40083a0/image_desktop"
       }
     ]
   }

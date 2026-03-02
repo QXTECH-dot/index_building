@@ -12,20 +12,10 @@ export async function POST(request: NextRequest) {
   try {
     const body: ContactPayload = await request.json()
 
-    // Basic validation
-    if (!body.name?.trim() || !body.email?.trim() || !body.message?.trim()) {
-      return NextResponse.json(
-        { error: 'Name, email, and message are required' },
-        { status: 400 }
-      )
-    }
-
+    // Source site does not mark fields required; keep the dev handler permissive.
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(body.email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address' },
-        { status: 400 }
-      )
+    if (body.email?.trim() && !emailRegex.test(body.email)) {
+      return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
     }
 
     // Log payload to console (dev/stub)

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { SectionReveal } from '@/components/SectionReveal'
+import { ContactForm } from '@/components/ContactForm'
 import { getContactPage, getBusiness, SITE_URL } from '@/lib/site-data'
 
 const contact = getContactPage()
@@ -19,14 +21,15 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* Page header */}
-      <div className="bg-stone-900 pt-32 pb-16">
+      {/* Page header — warm light */}
+      <div className="bg-warm-50 pt-14 pb-16 border-b border-warm-200">
         <div className="container-site">
           <SectionReveal>
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-400 mb-3">
-              Get In Touch
-            </p>
-            <h1 className="font-display font-bold text-display-xl text-white tracking-tight">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="block w-8 h-px bg-brand-accent flex-shrink-0" aria-hidden="true" />
+              <p className="eyebrow">Contact</p>
+            </div>
+            <h1 className="font-display font-semibold text-display-xl text-warm-900 tracking-tight max-w-2xl">
               {contact.h1}
             </h1>
           </SectionReveal>
@@ -36,71 +39,102 @@ export default function ContactPage() {
       {/* Contact details */}
       <section className="section-py bg-white" aria-label="Contact information">
         <div className="container-site">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          <div className="flex flex-wrap gap-12 lg:gap-16">
 
-            <SectionReveal>
-              <ContactBlock
-                eyebrow="Call Us"
-                icon={<path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />}
-              >
-                <a
-                  href={`tel:${business.phone.replace(/\s/g, '')}`}
-                  className="text-stone-900 font-medium hover:text-stone-500 transition-colors"
-                >
-                  {business.phone}
-                </a>
-              </ContactBlock>
-            </SectionReveal>
+            {business.phone && (
+              <SectionReveal>
+                <ContactBlock eyebrow="Call Us" icon="phone">
+                  <a
+                    href={`tel:${business.phone.replace(/\s/g, '')}`}
+                    className="text-warm-900 font-medium hover:text-brand-accent transition-colors duration-300 text-base"
+                  >
+                    {business.phone}
+                  </a>
+                </ContactBlock>
+              </SectionReveal>
+            )}
 
-            <SectionReveal delay={60}>
-              <ContactBlock
-                eyebrow="Email Us"
-                icon={<path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />}
-              >
-                <a
-                  href={`mailto:${business.email}`}
-                  className="text-stone-900 font-medium hover:text-stone-500 transition-colors break-all"
-                >
-                  {business.email}
-                </a>
-              </ContactBlock>
-            </SectionReveal>
+            {business.email && (
+              <SectionReveal delay={60}>
+                <ContactBlock eyebrow="Email Us" icon="email">
+                  <a
+                    href={`mailto:${business.email}`}
+                    className="text-warm-900 font-medium hover:text-brand-accent transition-colors duration-300 break-all text-base"
+                  >
+                    {business.email}
+                  </a>
+                </ContactBlock>
+              </SectionReveal>
+            )}
 
-            <SectionReveal delay={120}>
-              <ContactBlock
-                eyebrow="Visit Us"
-                icon={<path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />}
-              >
-                <address className="not-italic text-stone-900 font-medium leading-snug">
-                  {business.address}
-                </address>
-              </ContactBlock>
-            </SectionReveal>
+            {business.address && (
+              <SectionReveal delay={120}>
+                <ContactBlock eyebrow="Visit Us" icon="map">
+                  <address className="not-italic text-warm-900 font-medium leading-snug text-base">
+                    {business.address}
+                  </address>
+                </ContactBlock>
+              </SectionReveal>
+            )}
 
           </div>
 
           {/* Hours */}
-          <SectionReveal delay={80} className="mt-16 pt-12 border-t border-stone-100">
-            <div className="max-w-sm">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-400 mb-5">
-                Office Hours
+          {business.hours?.weekdays && (
+            <SectionReveal delay={80} className="mt-16 pt-12 border-t border-warm-200">
+              <div className="max-w-sm">
+                <p className="eyebrow text-warm-500 mb-6">Office Hours</p>
+                <dl className="space-y-3">
+                  <div className="flex justify-between gap-8 pb-3 border-b border-warm-100">
+                    <dt className="text-warm-600 text-sm">Monday – Friday</dt>
+                    <dd className="text-warm-900 text-sm font-medium">{business.hours.weekdays}</dd>
+                  </div>
+                  <div className="flex justify-between gap-8 pb-3 border-b border-warm-100">
+                    <dt className="text-warm-600 text-sm">Saturday</dt>
+                    <dd className="text-warm-400 text-sm">{business.hours.saturday}</dd>
+                  </div>
+                  <div className="flex justify-between gap-8">
+                    <dt className="text-warm-600 text-sm">Sunday</dt>
+                    <dd className="text-warm-400 text-sm">{business.hours.sunday}</dd>
+                  </div>
+                </dl>
+              </div>
+            </SectionReveal>
+          )}
+        </div>
+      </section>
+
+      {/* Send a message */}
+      <section className="section-py bg-warm-50 border-t border-warm-200" aria-label="Send a message">
+        <div className="container-site">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+            {/* Left: copy */}
+            <SectionReveal className="lg:col-span-5">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="block w-8 h-px bg-brand-accent flex-shrink-0" aria-hidden="true" />
+                <p className="eyebrow">Send a Message</p>
+              </div>
+              <h2 className="h-card mb-4">Let&rsquo;s Discuss Your Project</h2>
+              <p className="text-warm-600 text-body-md leading-relaxed mb-8">
+                Share a few details and we&rsquo;ll get back to you shortly. For urgent enquiries, call us directly and we&rsquo;ll help straight away.
               </p>
-              <dl className="space-y-3">
-                <div className="flex justify-between gap-8">
-                  <dt className="text-stone-500 text-sm">Monday – Friday</dt>
-                  <dd className="text-stone-900 text-sm font-medium">{business.hours.weekdays}</dd>
-                </div>
-                <div className="flex justify-between gap-8">
-                  <dt className="text-stone-500 text-sm">Saturday</dt>
-                  <dd className="text-stone-400 text-sm">{business.hours.saturday}</dd>
-                </div>
-                <div className="flex justify-between gap-8">
-                  <dt className="text-stone-500 text-sm">Sunday</dt>
-                  <dd className="text-stone-400 text-sm">{business.hours.sunday}</dd>
-                </div>
-              </dl>
-            </div>
-          </SectionReveal>
+
+              {business.phone && (
+                <Link href={`tel:${business.phone.replace(/\s/g, '')}`} className="btn-secondary">
+                  {business.phone}
+                </Link>
+              )}
+            </SectionReveal>
+
+            {/* Right: form */}
+            <SectionReveal delay={60} className="lg:col-span-7">
+              <div className="card p-6 sm:p-8">
+                <ContactForm />
+              </div>
+            </SectionReveal>
+
+          </div>
         </div>
       </section>
     </>
@@ -113,22 +147,31 @@ function ContactBlock({
   children,
 }: {
   eyebrow: string
-  icon: React.ReactNode
+  icon: 'phone' | 'email' | 'map'
   children: React.ReactNode
 }) {
   return (
-    <div>
-      <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center mb-4">
-        <svg className="w-4 h-4 text-stone-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
-          {icon}
-        </svg>
+    <div className="pl-4 border-l-2 border-brand-accent/30">
+      <div className="mb-3 text-brand-accent">
+        {icon === 'phone' && (
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+          </svg>
+        )}
+        {icon === 'email' && (
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+          </svg>
+        )}
+        {icon === 'map' && (
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5} aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+          </svg>
+        )}
       </div>
-      <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-400 mb-2">
-        {eyebrow}
-      </p>
-      <div className="text-sm leading-relaxed">
-        {children}
-      </div>
+      <p className="eyebrow text-warm-500 mb-2">{eyebrow}</p>
+      <div className="text-sm leading-relaxed">{children}</div>
     </div>
   )
 }

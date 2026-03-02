@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { PrimaryCTA } from '@/components/PrimaryCTA'
+import { ServiceGrid } from '@/components/ServiceGrid'
 import { SectionReveal } from '@/components/SectionReveal'
 import { getAboutPage, getServicesPage, SITE_URL } from '@/lib/site-data'
 
@@ -23,14 +23,15 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      {/* Page header */}
-      <div className="bg-stone-900 pt-32 pb-16">
+      {/* Page header — warm light */}
+      <div className="bg-warm-50 pt-14 pb-16 border-b border-warm-200">
         <div className="container-site">
           <SectionReveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-3">
-              Who We Are
-            </p>
-            <h1 className="font-display font-semibold text-display-xl text-white tracking-tight">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="block w-8 h-px bg-brand-accent flex-shrink-0" aria-hidden="true" />
+              <p className="eyebrow">Who We Are</p>
+            </div>
+            <h1 className="font-display font-semibold text-display-xl text-warm-900 tracking-tight max-w-2xl">
               {about.h1}
             </h1>
           </SectionReveal>
@@ -40,50 +41,61 @@ export default function AboutPage() {
       {/* Main content */}
       <section className="section-py bg-white" aria-labelledby="about-company">
         <div className="container-site">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-            {/* Content */}
-            <div className="lg:col-span-7">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+            {/* Content column */}
+            <div className="lg:col-span-7 space-y-10">
               <SectionReveal>
-                <h2 id="about-company" className="h-card text-stone-900 mb-6">
-                  Our Company
+                <h2 id="about-company" className="h-card mb-6">
+                  Building Excellence in Canberra
                 </h2>
                 <div className="space-y-5">
-                  {about.body.map((para, i) => (
-                    <p key={i} className="text-stone-600 text-body-lg leading-relaxed">
-                      {para}
-                    </p>
-                  ))}
+                  {(about.body ?? []).length > 0
+                    ? (about.body ?? []).map((para, i) => (
+                        <p key={i} className="text-warm-600 text-body-md leading-relaxed">{para}</p>
+                      ))
+                    : (
+                        <p className="text-warm-600 text-body-md leading-relaxed">
+                          {about.metaDescription || 'Index Building Group is your trusted local builder serving Canberra and surrounding regions.'}
+                        </p>
+                      )
+                  }
                 </div>
               </SectionReveal>
 
               {/* Testimonial */}
               {about.testimonial && (
-                <SectionReveal delay={60} className="mt-10">
-                  <blockquote className="relative p-8 bg-stone-50 rounded-card border border-stone-100">
-                    <div className="absolute top-6 left-6 text-stone-200 text-5xl font-serif leading-none" aria-hidden="true">
-                      "
+                <SectionReveal delay={60}>
+                  <blockquote className="relative bg-warm-50 border border-warm-200 rounded-card p-8 md:p-10 overflow-hidden">
+                    {/* Gold accent left bar */}
+                    <div className="absolute top-0 left-0 w-1 h-full bg-brand-accent rounded-l-card" aria-hidden="true" />
+                    <div
+                      className="absolute top-4 right-8 text-[6rem] font-serif leading-none select-none text-brand-accent/10"
+                      aria-hidden="true"
+                    >
+                      &ldquo;
                     </div>
-                    <p className="relative text-stone-700 text-lg italic leading-relaxed pt-4">
+                    <p className="relative font-display italic text-lg text-warm-800 leading-relaxed mb-5">
                       {about.testimonial.quote}
                     </p>
-                    <cite className="block mt-4 text-sm text-stone-400 not-italic">
+                    <cite className="block text-xs tracking-[0.1em] uppercase text-brand-accent not-italic font-semibold">
                       — {about.testimonial.attribution}
                     </cite>
                   </blockquote>
                 </SectionReveal>
               )}
 
-              <SectionReveal delay={80} className="mt-8">
+              <SectionReveal delay={80}>
                 <Link href="/contact" className="btn-primary">
-                  Start a Project
+                  Contact Us
                 </Link>
               </SectionReveal>
             </div>
 
-            {/* Image */}
+            {/* Image column */}
             {about.image && (
               <SectionReveal delay={40} className="lg:col-span-5">
-                <div className="relative aspect-[3/4] rounded-card overflow-hidden bg-stone-100 sticky top-28">
+                <div className="relative aspect-[3/4] rounded-card overflow-hidden bg-warm-100 ring-1 ring-brand-accent/15 sticky top-28 shadow-card">
                   <Image
                     src={about.image}
                     alt="Index Building – construction team in Canberra"
@@ -99,37 +111,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Services quick list */}
-      <section className="section-py bg-stone-50" aria-labelledby="about-services">
+      {/* Services */}
+      <section className="section-py bg-white" aria-labelledby="about-services">
         <div className="container-site">
           <SectionReveal>
-            <h2 id="about-services" className="h-card text-stone-900 mb-8">
-              What We Specialise In
-            </h2>
+            <div className="max-w-xl mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="block w-8 h-px bg-brand-accent flex-shrink-0" aria-hidden="true" />
+                <p className="eyebrow">Our Expertise</p>
+              </div>
+              <h2 id="about-services" className="h-section">
+                {services.h1}
+              </h2>
+            </div>
           </SectionReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {services.items.map((service, i) => (
-              <SectionReveal key={service.name} delay={i * 50}>
-                <div className="p-6 bg-white rounded-card border border-stone-100">
-                  <h3 className="font-display font-medium text-xl text-stone-900 mb-2">
-                    {service.name}
-                  </h3>
-                  <p className="text-stone-500 text-sm leading-relaxed">
-                    {service.description.slice(0, 120)}…
-                  </p>
-                </div>
-              </SectionReveal>
-            ))}
-          </div>
-          <SectionReveal className="mt-8">
-            <Link href="/services" className="btn-secondary">
-              View All Services
-            </Link>
-          </SectionReveal>
+          <ServiceGrid services={services.items} />
         </div>
       </section>
-
-      <PrimaryCTA />
     </>
   )
 }

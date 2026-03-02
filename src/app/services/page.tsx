@@ -22,13 +22,14 @@ export default function ServicesPage() {
   return (
     <>
       {/* Page header */}
-      <div className="bg-stone-900 pt-32 pb-16">
+      <div className="bg-warm-50 pt-14 pb-16 border-b border-warm-200">
         <div className="container-site">
           <SectionReveal>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-3">
-              What We Offer
-            </p>
-            <h1 className="font-display font-semibold text-display-xl text-white tracking-tight">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="block w-8 h-px bg-brand-accent flex-shrink-0" aria-hidden="true" />
+              <p className="eyebrow">What We Offer</p>
+            </div>
+            <h1 className="font-display font-semibold text-display-xl text-warm-900 tracking-tight max-w-2xl">
               {servicesPage.h1}
             </h1>
           </SectionReveal>
@@ -44,7 +45,7 @@ export default function ServicesPage() {
                 {/* Image — alternates sides */}
                 {service.image && (
                   <div className={`lg:col-span-5 ${i % 2 === 1 ? 'lg:order-2' : ''}`}>
-                    <div className="relative aspect-[4/3] rounded-card overflow-hidden bg-stone-100">
+                    <div className="relative aspect-[4/3] rounded-card overflow-hidden bg-warm-100">
                       <Image
                         src={service.image}
                         alt={service.name}
@@ -58,26 +59,26 @@ export default function ServicesPage() {
                 )}
 
                 <div className={`${service.image ? 'lg:col-span-7' : 'lg:col-span-12'} ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                  <span className="text-xs font-semibold uppercase tracking-widest text-stone-400 mb-3 block">
+                  <span className="text-xs font-semibold uppercase tracking-widest eyebrow mb-3 block">
                     Service 0{i + 1}
                   </span>
-                  <h2 className="h-card text-stone-900 mb-4">
+                  <h2 className="h-card text-warm-900 mb-4">
                     {service.name}
                   </h2>
-                  <p className="text-stone-600 text-body-lg leading-relaxed mb-6">
+                  <p className="text-warm-600 text-body-lg leading-relaxed mb-6">
                     {service.description}
                   </p>
                   <Link
-                    href="/contact"
+                    href={`/services/${service.slug}`}
                     className="btn-secondary"
-                    aria-label={`Enquire about ${service.name}`}
+                    aria-label={`Learn more about ${service.name}`}
                   >
-                    Enquire About This Service
+                    Learn More
                   </Link>
                 </div>
               </article>
               {i < servicesPage.items.length - 1 && (
-                <hr className="mt-20 border-stone-100" aria-hidden="true" />
+                <hr className="mt-20 border-warm-100" aria-hidden="true" />
               )}
             </SectionReveal>
           ))}

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { getBusiness, getNav, SITE_URL } from '@/lib/site-data'
+import { getBusiness, getNav } from '@/lib/site-data'
 
 const business = getBusiness()
 const navItems = getNav()
@@ -8,31 +8,33 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-stone-900 text-stone-300" aria-label="Footer">
+    <footer className="bg-warm-900 border-t border-warm-800" aria-label="Footer">
+      {/* Gold accent top line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent" aria-hidden="true" />
+
       <div className="container-site py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-14">
           {/* Brand */}
           <div>
-            <p className="font-display font-semibold text-white text-lg mb-3">
+            <p className="font-display font-semibold text-white text-xl tracking-tight mb-2">
               Index Building
             </p>
-            <p className="text-sm leading-relaxed text-stone-400 max-w-xs">
+            <div className="divider-gold mb-5" aria-hidden="true" />
+            <p className="text-sm leading-relaxed text-warm-400 max-w-xs">
               {business.tagline}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-500 mb-4">
-              Navigation
-            </p>
+            <p className="eyebrow mb-5">Navigation</p>
             <nav aria-label="Footer navigation">
-              <ul className="space-y-2">
+              <ul className="space-y-3">
                 {navItems.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-stone-400 hover:text-white transition-colors duration-150"
+                      className="text-sm text-warm-400 hover:text-brand-accent transition-colors duration-300"
                     >
                       {item.label}
                     </Link>
@@ -44,38 +46,46 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-stone-500 mb-4">
-              Get in Touch
-            </p>
-            <address className="not-italic space-y-2">
-              <p className="text-sm text-stone-400">{business.address}</p>
-              <a
-                href={`tel:${business.phone.replace(/\s/g, '')}`}
-                className="block text-sm text-stone-400 hover:text-white transition-colors duration-150"
-              >
-                {business.phone}
-              </a>
-              <a
-                href={`mailto:${business.email}`}
-                className="block text-sm text-stone-400 hover:text-white transition-colors duration-150"
-              >
-                {business.email}
-              </a>
-              <p className="text-sm text-stone-500 mt-3">
-                Mon–Fri: {business.hours.weekdays}
-              </p>
+            <p className="eyebrow mb-5">Get in Touch</p>
+            <address className="not-italic space-y-3">
+              {business.address && (
+                <p className="text-sm text-warm-400 leading-relaxed">{business.address}</p>
+              )}
+              {business.phone && (
+                <a
+                  href={`tel:${business.phone.replace(/\s/g, '')}`}
+                  className="block text-sm text-warm-400 hover:text-brand-accent transition-colors duration-300"
+                >
+                  {business.phone}
+                </a>
+              )}
+              {business.email && (
+                <a
+                  href={`mailto:${business.email}`}
+                  className="block text-sm text-warm-400 hover:text-brand-accent transition-colors duration-300"
+                >
+                  {business.email}
+                </a>
+              )}
+              {business.hours?.weekdays && (
+                <p className="text-sm text-warm-500 mt-4 pt-4 border-t border-warm-800">
+                  Mon–Fri &nbsp;·&nbsp; {business.hours.weekdays}
+                </p>
+              )}
             </address>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-stone-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-stone-500">
-            © {currentYear} Index Building. All rights reserved. ABN registered in Canberra, ACT.
+        <div className="mt-12 pt-8 border-t border-warm-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-warm-600">
+            © {currentYear} Index Building. All rights reserved.
           </p>
-          <p className="text-xs text-stone-600">
-            Serving Canberra &amp; surrounds
-          </p>
+          {business.area && (
+            <p className="text-xs text-warm-600 tracking-wide">
+              {business.area}
+            </p>
+          )}
         </div>
       </div>
     </footer>
