@@ -1,35 +1,42 @@
 #!/usr/bin/env tsx
 /**
- * Downloads all known assets from Wayback Machine and writes site.json
+ * Crawls http://www.indexbuilding.com.au/ and:
+ * - downloads referenced assets into /public/assets/www/** (preserving correct file types)
+ * - saves HTML snapshots into /_source_snapshots
+ * - writes structured JSON into /_content/site.json
  */
 import * as fs from 'fs'
 import * as path from 'path'
 import * as https from 'https'
 import * as http from 'http'
-import * as crypto from 'crypto'
+import { chromium } from 'playwright'
 
-const ASSETS_DIR = path.join(process.cwd(), 'public/assets/images')
+const ORIGIN = 'http://www.indexbuilding.com.au'
+const ASSETS_ROOT = path.join(process.cwd(), 'public/assets/www')
 const CONTENT_DIR = path.join(process.cwd(), '_content')
 const SNAPSHOTS_DIR = path.join(process.cwd(), '_source_snapshots')
-const WB_BASE = 'https://web.archive.org/web/20241002034710im_/https://indexbuilding.com.au'
 
-for (const d of [ASSETS_DIR, CONTENT_DIR, SNAPSHOTS_DIR]) {
+const PAGES: { slug: 'home' | 'about' | 'projects' | 'contact'; path: string }[] = [
+  { slug: 'home', path: '/' },
+  { slug: 'about', path: '/about-us/' },
+  { slug: 'projects', path: '/projects/' },
+  { slug: 'contact', path: '/contact-us/' },
+]
+
+for (const d of [ASSETS_ROOT, CONTENT_DIR, SNAPSHOTS_DIR]) {
   fs.mkdirSync(d, { recursive: true })
 }
 
-function download(url: string, dest: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    if (fs.existsSync(dest)) {
-      console.log(`  Already exists: ${path.basename(dest)}`)
-      return resolve()
-    }
+type FetchResult = { buffer: Buffer; contentType: string | null }
 
+function fetchUrl(url: string): Promise<FetchResult> {
+  return new Promise((resolve, reject) => {
     const proto = url.startsWith('https') ? https : http
     const req = proto.get(url, { timeout: 30000 }, (res) => {
       if (res.statusCode === 301 || res.statusCode === 302) {
         const loc = res.headers.location
         if (loc) {
-          download(loc.startsWith('http') ? loc : new URL(loc, url).href, dest)
+          fetchUrl(loc.startsWith('http') ? loc : new URL(loc, url).href)
             .then(resolve).catch(reject)
         } else {
           reject(new Error('Redirect with no location'))
@@ -40,12 +47,11 @@ function download(url: string, dest: string): Promise<void> {
         reject(new Error(`HTTP ${res.statusCode} for ${url}`))
         return
       }
+      const contentType = (res.headers['content-type'] || null) as string | null
       const chunks: Buffer[] = []
       res.on('data', (c: Buffer) => chunks.push(c))
       res.on('end', () => {
-        fs.writeFileSync(dest, Buffer.concat(chunks))
-        console.log(`  ✓ ${path.basename(dest)} (${Math.round(Buffer.concat(chunks).length / 1024)}KB)`)
-        resolve()
+        resolve({ buffer: Buffer.concat(chunks), contentType })
       })
       res.on('error', reject)
     })
@@ -54,249 +60,353 @@ function download(url: string, dest: string): Promise<void> {
   })
 }
 
-const IMAGES: { url: string; name: string; alt: string }[] = [
-  { url: `${WB_BASE}/assets/images/logo.png`, name: 'logo.png', alt: 'Index Building logo' },
-  { url: `${WB_BASE}/assets/images/bel.jpg`, name: 'bel.jpg', alt: 'Belconnen Fresh Market renovation' },
-  { url: `${WB_BASE}/assets/images/house.jpg`, name: 'house.jpg', alt: 'House construction project' },
-  { url: `${WB_BASE}/assets/images/con.jpg`, name: 'con.jpg', alt: 'Construction and flooring project' },
-  { url: `${WB_BASE}/assets/images/about.jpg`, name: 'about.jpg', alt: 'Index Building team' },
-  { url: `${WB_BASE}/assets/images/bg_header.jpg`, name: 'bg_header.jpg', alt: 'Index Building hero background' },
-  { url: `${WB_BASE}/assets/images/portfolio/img1.jpg`, name: 'portfolio-img1.jpg', alt: 'Whitlam new project' },
-  { url: `${WB_BASE}/assets/images/portfolio/img2.jpg`, name: 'portfolio-img2.jpg', alt: 'Construction project' },
-  { url: `${WB_BASE}/assets/images/portfolio/img3.jpg`, name: 'portfolio-img3.jpg', alt: 'Belconnen Fresh Market project' },
-  { url: `${WB_BASE}/assets/images/portfolio/img4.jpg`, name: 'portfolio-img4.jpg', alt: 'Denman project' },
-  { url: `${WB_BASE}/assets/images/portfolio/img5.jpg`, name: 'portfolio-img5.jpg', alt: 'Renovation project' },
-  { url: `${WB_BASE}/assets/images/portfolio/img6.jpg`, name: 'portfolio-img6.jpg', alt: 'Whitlam project construction start' },
-  { url: `${WB_BASE}/assets/images/portfolio/img7.jpg`, name: 'portfolio-img7.jpg', alt: 'Building project' },
-  { url: `${WB_BASE}/assets/images/portfolio/img8.jpg`, name: 'portfolio-img8.jpg', alt: 'Construction project' },
-]
+function extFromContentType(contentType: string | null): string | null {
+  if (!contentType) return null
+  const t = contentType.split(';')[0].trim().toLowerCase()
+  if (t === 'image/jpeg') return '.jpg'
+  if (t === 'image/png') return '.png'
+  if (t === 'image/webp') return '.webp'
+  if (t === 'image/avif') return '.avif'
+  if (t === 'image/gif') return '.gif'
+  if (t === 'image/svg+xml') return '.svg'
+  if (t === 'image/x-icon' || t === 'image/vnd.microsoft.icon') return '.ico'
+  return null
+}
 
-// Also try xhs images
-const XHS_IMAGES = [
-  {
-    url: `https://web.archive.org/web/20241002034716im_/https://indexbuilding.com.au/assets/images/xhs/%E4%B8%9C%E5%B7%B4%E9%93%81%20%E4%B9%9F%E6%98%AF%E5%B7%B4%E9%93%81%F0%9F%98%84%20whitlam%20%E6%96%B0%E6%88%BF_1_%E5%A0%AA%E5%9F%B9%E6%8B%89Stephen%20Zhou_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg`,
-    name: 'xhs-whitlam-1.jpg',
-    alt: 'Whitlam new home project'
-  },
-  {
-    url: `https://web.archive.org/web/20241002034720im_/https://indexbuilding.com.au/assets/images/xhs/%E5%A0%AA%E5%9F%B9%E6%8B%89%20belconnen%20fresh%20market_2_%E5%A0%AA%E5%9F%B9%E6%8B%89Stephen%20Zhou_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg`,
-    name: 'xhs-belconnen-2.jpg',
-    alt: 'Belconnen Fresh Market, Canberra'
-  },
-  {
-    url: `https://web.archive.org/web/20241002034721im_/https://indexbuilding.com.au/assets/images/xhs/%E5%BA%94%E8%AF%A5%E6%98%AFdenman%20%E4%BA%8C%E6%9C%9F%E7%AC%AC%E4%B8%80%E4%B8%AA%E9%80%9A%E7%94%B5%E7%9A%84%E6%88%BF%E5%AD%90%F0%9F%98%84_1_%E5%A0%AA%E5%9F%B9%E6%8B%89Stephen%20Zhou_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg`,
-    name: 'xhs-denman-1.jpg',
-    alt: 'First house in Denman Phase II to be electrified'
-  },
-  {
-    url: `https://web.archive.org/web/20241002034722im_/https://indexbuilding.com.au/assets/images/xhs/%E8%BD%A6%E5%BA%93%E9%97%A8%20resize%EF%BC%8C%E5%A0%AA%E5%9F%B9%E6%8B%89%E5%BB%BA%E7%AD%91%F0%9F%98%8A_1_%E5%A0%AA%E5%9F%B9%E6%8B%89Stephen%20Zhou_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg`,
-    name: 'xhs-garage-door.jpg',
-    alt: 'Garage door installation, Canberra'
-  },
-  {
-    url: `https://web.archive.org/web/20241002034723im_/https://indexbuilding.com.au/assets/images/xhs/%F0%9F%98%84whitlam%20%E5%BC%80%E5%B7%A5%20%E5%92%B1%E4%BB%AC%E4%B9%9F%E6%9D%A5%E6%B2%BE%E4%B8%80%E6%B2%BE%E5%A5%BD%E8%BF%90%E5%90%A7_1_%E5%A0%AA%E5%9F%B9%E6%8B%89Stephen%20Zhou_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.jpg`,
-    name: 'xhs-whitlam-groundbreaking.jpg',
-    alt: 'Whitlam project groundbreaking ceremony'
-  },
-  {
-    url: `https://web.archive.org/web/20241002034723im_/https://indexbuilding.com.au/assets/images/xhs/img3.jpg`,
-    name: 'xhs-img3.jpg',
-    alt: 'Building project Canberra'
-  },
-]
+function extFromBuffer(buffer: Buffer): string | null {
+  // Magic numbers
+  if (buffer.length >= 12) {
+    // PNG
+    if (buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47) return '.png'
+    // JPEG
+    if (buffer[0] === 0xff && buffer[1] === 0xd8) return '.jpg'
+    // GIF
+    if (buffer[0] === 0x47 && buffer[1] === 0x49 && buffer[2] === 0x46) return '.gif'
+    // WEBP (RIFF....WEBP)
+    if (
+      buffer[0] === 0x52 && buffer[1] === 0x49 && buffer[2] === 0x46 && buffer[3] === 0x46 &&
+      buffer[8] === 0x57 && buffer[9] === 0x45 && buffer[10] === 0x42 && buffer[11] === 0x50
+    ) return '.webp'
+    // SVG (text)
+    const head = buffer.subarray(0, Math.min(buffer.length, 200)).toString('utf8').trimStart()
+    if (head.startsWith('<svg') || head.startsWith('<?xml')) return '.svg'
+  }
+  return null
+}
+
+function stripTags(html: string): string {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|section|article|header|footer|h1|h2|h3|h4|h5|h6|li)>/gi, '\n')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, '\'')
+    .replace(/\s+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
+function extractFirst(html: string, re: RegExp): string | null {
+  const m = html.match(re)
+  return m?.[1]?.trim() || null
+}
+
+function toLocalPathForAssetPath(
+  assetPath: string,
+  contentType: string | null,
+  buffer: Buffer
+): { localPath: string; destAbs: string } {
+  // assetPath is URL path (starts with /)
+  const baseDest = path.join(ASSETS_ROOT, assetPath.replace(/^\//, ''))
+  const baseLocal = `/assets/www${assetPath}`
+
+  const currentExt = path.extname(assetPath)
+  const ext = extFromContentType(contentType) || extFromBuffer(buffer)
+
+  if (!currentExt && ext) {
+    return {
+      localPath: `${baseLocal}${ext}`,
+      destAbs: `${baseDest}${ext}`,
+    }
+  }
+
+  // If the URL has an extension but the bytes say otherwise, prefer the content-type extension.
+  if (currentExt && ext && currentExt.toLowerCase() !== ext) {
+    const noExt = assetPath.slice(0, -currentExt.length)
+    const destNoExt = baseDest.slice(0, -currentExt.length)
+    return {
+      localPath: `/assets/www${noExt}${ext}`,
+      destAbs: `${destNoExt}${ext}`,
+    }
+  }
+
+  return { localPath: baseLocal, destAbs: baseDest }
+}
 
 async function main() {
-  console.log('Downloading assets...\n')
+  console.log(`Crawling ${ORIGIN}...\n`)
+
+  const htmlBySlug = new Map<string, string>()
+  const pageDataBySlug = new Map<string, any>()
+  const assetUrls = new Set<string>()
+
+  const browser = await chromium.launch({ headless: true })
+
+  for (const p of PAGES) {
+    const url = `${ORIGIN}${p.path}`
+    try {
+      const page = await browser.newPage()
+      await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 })
+      // Images on the source site are lazy-loaded and can populate after `networkidle`.
+      // Give the page a small grace period, longer on the Projects gallery.
+      await page.waitForTimeout(p.slug === 'projects' ? 3000 : 1200)
+
+      const html = await page.content()
+      htmlBySlug.set(p.slug, html)
+      fs.writeFileSync(path.join(SNAPSHOTS_DIR, `${p.slug}.html`), html, 'utf-8')
+
+      const data = await page.evaluate(() => {
+        const metaDescription =
+          (document.querySelector('meta[name=\"description\"]') as HTMLMetaElement | null)?.content || ''
+
+        const header = document.querySelector('header') || document.querySelector('.header') || document.querySelector('[data-widget=\"header\"]')
+        const headerLogo = header?.querySelector('a.logo__link img') as HTMLImageElement | null
+        const logoSrc = headerLogo ? (headerLogo.currentSrc || headerLogo.src) : ''
+
+        const navLinks = header
+          ? [...header.querySelectorAll('a')]
+            .map((a) => ({ label: (a.textContent || '').trim(), href: (a as HTMLAnchorElement).href }))
+            .filter((x) => x.label && x.href)
+          : []
+
+        const imgs = [...document.querySelectorAll('img')]
+          .map((img) => ({
+            src: (img as HTMLImageElement).currentSrc || (img as HTMLImageElement).src,
+            alt: (img as HTMLImageElement).alt || '',
+            w: (img as HTMLImageElement).naturalWidth || 0,
+            h: (img as HTMLImageElement).naturalHeight || 0,
+            className: (img as HTMLImageElement).className || '',
+          }))
+          .filter((i) => i.src)
+
+        // Primary text blocks (best-effort: large headings + paragraphs)
+        const headings = [...document.querySelectorAll('h1, h2, h3')]
+          .map((h) => (h.textContent || '').trim())
+          .filter(Boolean)
+
+        const paragraphs = [...document.querySelectorAll('p')]
+          .map((p) => (p.textContent || '').trim())
+          .filter((t) => t.length >= 30)
+
+        const emails = (document.body.textContent || '').match(/[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}/g) || []
+        const phones =
+          (document.body.textContent || '')
+            .match(/(\\+?61[\\s\\-]?\\d[\\s\\-]?\\d{3,4}[\\s\\-]?\\d{3,4}|\\(0\\d\\)[\\s\\-]?\\d{4}[\\s\\-]?\\d{4}|0\\d{9})/g) || []
+
+        return {
+          title: document.title || '',
+          metaDescription,
+          headings,
+          paragraphs,
+          navLinks,
+          logoSrc,
+          imgs,
+          emails: [...new Set(emails)],
+          phones: [...new Set(phones)],
+        }
+      })
+
+      pageDataBySlug.set(p.slug, data)
+      console.log(`  ✓ Snapshot ${p.slug}`)
+      await page.close()
+    } catch (err) {
+      console.warn(`  ✗ Snapshot ${p.slug}: ${(err as Error).message}`)
+    }
+  }
+
+  await browser.close()
+
+  // Build asset URL set from rendered pages (not raw HTML, which is a JS shell)
+  for (const d of pageDataBySlug.values()) {
+    const logoSrc = d.logoSrc as string
+    if (logoSrc && logoSrc.startsWith(ORIGIN)) assetUrls.add(logoSrc)
+    for (const img of d.imgs as { src: string; w: number; h: number }[]) {
+      if (!img.src) continue
+      if (!img.src.startsWith(ORIGIN)) continue
+      assetUrls.add(img.src)
+    }
+  }
+
+  console.log(`\nDownloading assets (${assetUrls.size})...\n`)
 
   const downloaded: { name: string; localPath: string; alt: string; originalUrl: string }[] = []
+  const originalToLocal = new Map<string, string>()
 
-  for (const img of [...IMAGES, ...XHS_IMAGES]) {
-    const dest = path.join(ASSETS_DIR, img.name)
+  for (const url of [...assetUrls]) {
     try {
-      await download(img.url, dest)
+      const u = new URL(url)
+      const assetPath = u.pathname
+      const { buffer, contentType } = await fetchUrl(url)
+      const { localPath, destAbs } = toLocalPathForAssetPath(assetPath, contentType, buffer)
+      fs.mkdirSync(path.dirname(destAbs), { recursive: true })
+      fs.writeFileSync(destAbs, buffer)
+      originalToLocal.set(url, localPath)
       downloaded.push({
-        name: img.name,
-        localPath: `/assets/images/${img.name}`,
-        alt: img.alt,
-        originalUrl: img.url,
+        name: path.basename(destAbs),
+        localPath,
+        alt: '',
+        originalUrl: url,
       })
+      console.log(`  ✓ ${assetPath}`)
     } catch (err) {
-      console.warn(`  ✗ Failed ${img.name}: ${(err as Error).message}`)
+      console.warn(`  ✗ Failed ${url}: ${(err as Error).message}`)
     }
   }
 
-  // Save HTML snapshots
-  const pages = ['', 'about.html', 'projects.html', 'contact.html']
-  const snapshots: Record<string, string> = {}
-  for (const p of pages) {
-    const slug = p.replace('.html', '') || 'home'
-    const snapPath = path.join(SNAPSHOTS_DIR, `${slug}.html`)
-    if (!fs.existsSync(snapPath)) {
-      const url = `https://web.archive.org/web/20241002034710/${p ? 'https://indexbuilding.com.au/' + p : 'https://indexbuilding.com.au/'}`
-      try {
-        await download(url, snapPath)
-        snapshots[slug] = snapPath
-      } catch (err) {
-        console.warn(`  ✗ Snapshot ${slug}: ${(err as Error).message}`)
-      }
-    } else {
-      snapshots[slug] = snapPath
-    }
-  }
+  const home = pageDataBySlug.get('home') || {}
+  const about = pageDataBySlug.get('about') || {}
+  const projects = pageDataBySlug.get('projects') || {}
+  const contact = pageDataBySlug.get('contact') || {}
 
-  // Build site.json from extracted data
-  const downloadedMap = new Map(downloaded.map(d => [d.name, d]))
+  const email = (contact.emails?.[0] as string | undefined) || ''
+  const phone = (contact.phones?.[0] as string | undefined) || ''
+
+  // Use the header logo image as the canonical logo (matches the one users see).
+  const logoUrl = (home.logoSrc as string | undefined) || ''
+  const logoLocal = logoUrl ? originalToLocal.get(logoUrl) || null : null
+
+  // Hero images: large, full-bleed desktop images on the home page (avoid the logo itself).
+  const heroCandidates = (home.imgs as { src: string; w: number; h: number }[] | undefined || [])
+    .filter((i) => i.src && i.src.startsWith(ORIGIN))
+    .filter((i) => i.w >= 1000 && i.h >= 600)
+    .filter((i) => !logoUrl || i.src !== logoUrl)
+    .slice(0, 4)
+    .map((i) => originalToLocal.get(i.src))
+    .filter(Boolean) as string[]
+
+  const heroImage = heroCandidates[0] || ''
+
+  const aboutImage = ((about.imgs as { src: string; w: number; h: number }[] | undefined) || [])
+    .filter((i) => i.src && i.src.startsWith(ORIGIN))
+    .filter((i) => i.w >= 1000 && i.h >= 600)
+    .filter((i) => !logoUrl || i.src !== logoUrl)
+    .map((i) => originalToLocal.get(i.src))
+    .filter(Boolean)[0] as (string | undefined)
+
+  const contactImage = ((contact.imgs as { src: string; w: number; h: number }[] | undefined) || [])
+    .filter((i) => i.src && i.src.startsWith(ORIGIN))
+    .filter((i) => i.w >= 1000 && i.h >= 600)
+    .filter((i) => !logoUrl || i.src !== logoUrl)
+    .map((i) => originalToLocal.get(i.src))
+    .filter(Boolean)[0] as (string | undefined)
+
+  // Project images: large images on /projects/ (exclude the header logo).
+  const projectImgs = (projects.imgs as { src: string }[] | undefined || [])
+    .map((i) => i.src)
+    .filter((src) => src && src.startsWith(ORIGIN))
+    // The site serves project photos as /__static/<uuid>/image_laptop (no extension).
+    .filter((src) => /\/__static\/[^/]+\/image_laptop$/.test(src))
+    .filter((src) => !logoUrl || src !== logoUrl)
+    .map((src) => originalToLocal.get(src))
+    .filter(Boolean) as string[]
+
+  const uniqueProjectImgs = [...new Set(projectImgs)].slice(0, 36)
+
+  const projectItems = uniqueProjectImgs.map((localPath) => ({
+    title: '',
+    description: '',
+    image: localPath,
+  }))
+
+  // About page on the source site doesn't expose stable long-form copy in the DOM (it largely repeats the feature blocks).
+  // Keep this empty to avoid accidentally ingesting cookie banner text.
+  const aboutParas: string[] = []
+
+  const homeText = stripTags(htmlBySlug.get('home') || '')
+  const tagline =
+    extractFirst(homeText, /Built on Trust\.\s*Focused on You\./i) ||
+    'Built on Trust. Focused on You.'
+
+  // These four feature blocks are present on the source site. Keep them verbatim (no added claims).
+  const featureItems = [
+    { name: 'Client-First Approach', description: 'We treat every build like it’s our own. That means open communication, honest advice, and no shortcuts.' },
+    { name: 'All Projects, Big or Small', description: 'From home extensions to new commercial builds, no job is too complex or too modest. If it matters to you, it matters to us.' },
+    { name: 'Local Knowledge, Local Pride', description: 'As a locally owned and operated business, we understand the unique needs of our community and we’re proud to help shape it.' },
+    { name: 'Professional Delivery, Every Time', description: 'Backed by a reliable team, licensed trades, and a fleet of heavy vehicles and equipment, we deliver with speed, precision, and care.' },
+  ]
 
   const siteData = {
     crawledAt: new Date().toISOString(),
-    baseUrl: 'https://indexbuilding.com.au',
+    baseUrl: ORIGIN,
     business: {
-      name: 'Index Building',
-      tagline: 'Canberra\'s trusted construction and renovation specialists',
-      address: '12/233 Flemington Road, Franklin ACT 2913',
-      phone: '+61 416 217 919',
-      email: 'stephen@indexbuilding.com.au',
-      hours: {
-        weekdays: '09:00 AM – 6:30 PM',
-        saturday: 'Closed',
-        sunday: 'Closed',
-      },
-      area: 'Canberra, ACT, Australia',
+      name: 'Index Building Group',
+      tagline,
+      address: '',
+      phone,
+      email,
+      hours: { weekdays: '', saturday: '', sunday: '' },
+      area: 'Canberra and surrounding regions',
     },
     nav: [
       { label: 'Home', href: '/' },
-      { label: 'About', href: '/about' },
+      { label: 'About us', href: '/about' },
       { label: 'Projects', href: '/projects' },
-      { label: 'Contact', href: '/contact' },
+      { label: 'Contact us', href: '/contact' },
     ],
     pages: {
       home: {
         slug: 'home',
-        title: 'Index Building – Canberra Construction & Renovation',
-        metaDescription: 'Index Building is Canberra\'s trusted construction and renovation firm. We specialize in house construction, shop renovation, flooring installation, and repairs across the ACT.',
-        h1: 'Quality Construction & Renovation in Canberra',
-        heroImage: downloadedMap.get('bg_header.jpg')?.localPath || '/assets/images/house.jpg',
-        heroImages: [
-          downloadedMap.get('bg_header.jpg')?.localPath,
-          downloadedMap.get('house.jpg')?.localPath,
-          downloadedMap.get('bel.jpg')?.localPath,
-          downloadedMap.get('con.jpg')?.localPath,
-        ].filter(Boolean),
+        title: (home.title as string | undefined) || 'Index Building Group',
+        metaDescription: (home.metaDescription as string | undefined) || '',
+        h1: 'Built on Trust. Focused on You.',
+        heroImage,
+        heroImages: heroCandidates,
       },
       about: {
         slug: 'about',
-        title: 'About Us – Index Building Canberra',
-        metaDescription: 'Learn about Index Building – a premier construction and renovation firm based in Canberra dedicated to quality craftsmanship and customer satisfaction.',
-        h1: 'About Us',
-        body: [
-          'Building Index is a premier construction and renovation firm based in Canberra, dedicated to transforming residential spaces with precision and care. With a strong focus on quality and customer satisfaction, we specialize in house construction, renovations, flooring installations, and comprehensive house repairs.',
-          'Our team of skilled professionals brings years of experience and a deep commitment to excellence in every project we undertake. We work closely with our clients to understand their vision and ensure that every detail reflects their personal style and needs.',
-          'At Building Index, we focus on creating functional, stylish, and durable living spaces that reflect our clients\' unique needs and tastes. With a commitment to excellence and attention to detail, we ensure every project is completed to the highest standards.',
-          'Trust us to be your partner in building and enhancing your home, providing solutions that stand the test of time.',
-        ],
-        image: downloadedMap.get('about.jpg')?.localPath || null,
-        testimonial: {
-          quote: 'Thank you IndexBuilding, you are dedicated, professional and efficient. Thank you for your hard work.',
-          attribution: 'A customer from Canberra',
-        },
+        title: (about.title as string | undefined) || 'About us',
+        metaDescription: (about.metaDescription as string | undefined) || '',
+        h1: 'About us',
+        body: aboutParas.length ? aboutParas : [],
+        image: aboutImage || null,
+        testimonial: null,
       },
       services: {
         slug: 'services',
-        title: 'Our Services – Index Building Canberra',
-        metaDescription: 'Index Building offers expert shop renovation, house construction, flooring installation, and house repair services across Canberra, ACT.',
-        h1: 'Our Services',
-        items: [
-          {
-            name: 'Shop Renovation',
-            description: 'We specialize in transforming commercial spaces into modern, functional, and aesthetically pleasing environments. Our expert team handles every aspect of the renovation process, from initial design consultation to the final touches. We ensure that your shop reflects your brand\'s identity while creating an inviting atmosphere for customers.',
-            image: downloadedMap.get('bel.jpg')?.localPath || null,
-          },
-          {
-            name: 'House Construction',
-            description: 'We specialize in building custom homes that blend quality craftsmanship with innovative design. From the initial planning and architectural design to the final construction, our experienced team is committed to delivering your dream home on time and within budget. We work closely with you to understand your vision and ensure that every detail reflects your personal style and needs.',
-            image: downloadedMap.get('house.jpg')?.localPath || null,
-          },
-          {
-            name: 'Flooring Installation',
-            description: 'We offer professional flooring installation and renovation services to enhance the beauty and functionality of your home or commercial space. Whether you\'re looking for hardwood, laminate, tile, or vinyl flooring, our expert team provides high-quality craftsmanship and attention to detail.',
-            image: downloadedMap.get('con.jpg')?.localPath || null,
-          },
-          {
-            name: 'House Repairs',
-            description: 'From minor fixes to major structural repairs, our team handles all aspects of residential maintenance and repair. We ensure your property remains safe, functional, and well-maintained with quality workmanship on every job.',
-            image: downloadedMap.get('house.jpg')?.localPath || null,
-          },
-        ],
+        title: 'Full service building solutions',
+        metaDescription: '',
+        h1: 'Full service building solutions',
+        items: featureItems.map((f) => ({ ...f, image: null })),
       },
       projects: {
         slug: 'projects',
-        title: 'Our Projects – Index Building Canberra',
-        metaDescription: 'Explore Index Building\'s portfolio of completed projects in Canberra – house construction, commercial renovations, flooring, and more.',
-        h1: 'Our Projects',
-        items: [
-          {
-            title: 'Whitlam New Project – Anna and Tony\'s House',
-            description: 'New home construction in the Whitlam estate, Canberra.',
-            image: downloadedMap.get('xhs-whitlam-1.jpg')?.localPath || downloadedMap.get('portfolio-img1.jpg')?.localPath || null,
-          },
-          {
-            title: 'Belconnen Fresh Market',
-            description: 'Commercial shop renovation at Belconnen Fresh Market, Canberra.',
-            image: downloadedMap.get('xhs-belconnen-2.jpg')?.localPath || downloadedMap.get('bel.jpg')?.localPath || null,
-          },
-          {
-            title: 'Downer Granny Flat',
-            description: 'Granny flat construction in Downer, Canberra.',
-            image: downloadedMap.get('house.jpg')?.localPath || null,
-          },
-          {
-            title: 'Denman Phase II – First Electrified Home',
-            description: 'The first fully electrified house in Denman Phase II, Canberra.',
-            image: downloadedMap.get('xhs-denman-1.jpg')?.localPath || downloadedMap.get('portfolio-img4.jpg')?.localPath || null,
-          },
-          {
-            title: 'Kaleen Granny Flat',
-            description: 'Backyard granny flat addition in Kaleen, Canberra.',
-            image: downloadedMap.get('portfolio-img5.jpg')?.localPath || null,
-          },
-          {
-            title: 'Whitlam Project Groundbreaking',
-            description: 'Construction commencement for a new residential build in Whitlam.',
-            image: downloadedMap.get('xhs-whitlam-groundbreaking.jpg')?.localPath || null,
-          },
-          {
-            title: 'Garage Door Installation',
-            description: 'Residential garage door installation, Canberra.',
-            image: downloadedMap.get('xhs-garage-door.jpg')?.localPath || null,
-          },
-          {
-            title: 'Decking Construction',
-            description: 'Outdoor decking construction and renovation.',
-            image: downloadedMap.get('con.jpg')?.localPath || null,
-          },
-        ].filter(p => p.image !== null),
+        title: 'Projects',
+        metaDescription: '',
+        h1: 'Projects',
+        items: projectItems,
       },
       contact: {
         slug: 'contact',
-        title: 'Contact Us – Index Building Canberra',
-        metaDescription: 'Get in touch with Index Building for your construction and renovation project in Canberra. Call +61 416 217 919 or email stephen@indexbuilding.com.au.',
-        h1: 'Contact Us',
+        title: 'Contact us',
+        metaDescription: '',
+        h1: 'Contact us',
+        image: contactImage || null,
       },
     },
     assets: {
-      logo: downloadedMap.get('logo.png')?.localPath || null,
-      images: downloaded.map(d => ({
-        name: d.name,
-        localPath: d.localPath,
-        alt: d.alt,
-      })),
+      logo: logoLocal,
+      images: downloaded,
     },
   }
 
   const outputPath = path.join(CONTENT_DIR, 'site.json')
   fs.writeFileSync(outputPath, JSON.stringify(siteData, null, 2))
   console.log(`\n✅ site.json written to ${outputPath}`)
-  console.log(`   Assets downloaded: ${downloaded.length}`)
+  console.log(`   Assets referenced: ${downloaded.length}`)
 }
 
 main().catch(console.error)
