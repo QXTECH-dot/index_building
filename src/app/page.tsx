@@ -121,7 +121,7 @@ export default function HomePage() {
                     src={about.image}
                     alt="Index Building founder Stephen Zhou"
                     fill
-                    className="object-cover scale-[1.16]"
+                    className="object-cover scale-[1.20]"
                     sizes="(max-width: 1024px) 100vw, 41vw"
                     loading="lazy"
                   />
@@ -216,7 +216,7 @@ export default function HomePage() {
                       src={item.image!}
                       alt={`Index Building project ${i + 1}`}
                       fill
-                      className="object-cover scale-[1.16] transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.22]"
+                      className="object-cover scale-[1.20] transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.26]"
                       sizes="(max-width: 640px) 50vw, 33vw"
                       loading="lazy"
                     />

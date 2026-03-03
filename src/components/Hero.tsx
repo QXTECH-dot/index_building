@@ -101,7 +101,7 @@ export function Hero({ h1, subtitle, imageSrc, imageSrcs = [], imageAlt }: HeroP
                 src={src}
                 alt={idx === 0 ? imageAlt : ''}
                 fill
-                className="object-cover object-center scale-[1.16]"
+                className="object-cover object-center scale-[1.20]"
                 priority={idx === 0}
                 sizes="100vw"
                 quality={90}

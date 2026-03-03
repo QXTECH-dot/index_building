@@ -100,7 +100,7 @@ export default function AboutPage() {
                     src={about.image}
                     alt="Index Building – construction team in Canberra"
                     fill
-                    className="object-cover scale-[1.16]"
+                    className="object-cover scale-[1.20]"
                     sizes="(max-width: 1024px) 100vw, 41vw"
                     loading="lazy"
                   />

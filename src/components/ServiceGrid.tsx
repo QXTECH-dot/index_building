@@ -36,7 +36,7 @@ function ServiceCard({ service, index }: { service: ServiceItem; index: number }
             src={service.image}
             alt={service.name}
             fill
-            className="object-cover scale-[1.16] transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.22]"
+            className="object-cover scale-[1.20] transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.26]"
             sizes="(max-width: 640px) 100vw, 50vw"
             loading="lazy"
           />

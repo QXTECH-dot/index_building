@@ -139,7 +139,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                     src={service.image}
                     alt={service.name}
                     fill
-                    className="object-cover scale-[1.16]"
+                    className="object-cover scale-[1.20]"
                     sizes="(max-width: 1024px) 100vw, 41vw"
                     loading="lazy"
                   />
@@ -203,7 +203,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                         src={s.image}
                         alt={s.name}
                         fill
-                        className="object-cover scale-[1.16] group-hover:scale-[1.22] transition-transform duration-500"
+                        className="object-cover scale-[1.20] group-hover:scale-[1.26] transition-transform duration-500"
                         sizes="(max-width: 640px) 100vw, 33vw"
                         loading="lazy"
                       />
