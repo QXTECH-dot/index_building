@@ -139,7 +139,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                     src={service.image}
                     alt={service.name}
                     fill
-                    className="object-cover"
+                    className="object-cover scale-[1.12]"
                     sizes="(max-width: 1024px) 100vw, 41vw"
                     loading="lazy"
                   />
@@ -195,7 +195,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <SectionReveal key={s.slug} delay={i * 60}>
                 <Link
                   href={`/services/${s.slug}`}
-                  className="group block bg-warm-50 rounded-card border border-warm-200 overflow-hidden hover:border-brand-accent/40 hover:shadow-card transition-all duration-300"
+                  className="group block bg-warm-50 rounded-card border border-warm-200 overflow-hidden hover:border-brand-accent/40 hover:shadow-card transition-all duration-300 cursor-pointer"
                 >
                   {s.image && (
                     <div className="relative aspect-[16/9] overflow-hidden">
@@ -203,7 +203,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                         src={s.image}
                         alt={s.name}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover scale-[1.12] group-hover:scale-[1.18] transition-transform duration-500"
                         sizes="(max-width: 640px) 100vw, 33vw"
                         loading="lazy"
                       />

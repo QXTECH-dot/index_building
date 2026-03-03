@@ -101,7 +101,7 @@ export function Hero({ h1, subtitle, imageSrc, imageSrcs = [], imageAlt }: HeroP
                 src={src}
                 alt={idx === 0 ? imageAlt : ''}
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center scale-[1.12]"
                 priority={idx === 0}
                 sizes="100vw"
                 quality={90}
@@ -156,7 +156,7 @@ export function Hero({ h1, subtitle, imageSrc, imageSrcs = [], imageAlt }: HeroP
           <button
             onClick={prevSlide}
             aria-label="Previous slide"
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:bg-brand-accent hover:border-brand-accent hover:text-warm-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:bg-brand-accent hover:border-brand-accent hover:text-warm-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent cursor-pointer"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -166,7 +166,7 @@ export function Hero({ h1, subtitle, imageSrc, imageSrcs = [], imageAlt }: HeroP
           <button
             onClick={next}
             aria-label="Next slide"
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:bg-brand-accent hover:border-brand-accent hover:text-warm-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent"
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 border border-white/20 text-white backdrop-blur-sm transition-all duration-300 hover:bg-brand-accent hover:border-brand-accent hover:text-warm-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent cursor-pointer"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
@@ -190,7 +190,7 @@ export function Hero({ h1, subtitle, imageSrc, imageSrcs = [], imageAlt }: HeroP
               aria-label={`Go to slide ${idx + 1}`}
               onClick={() => goTo(idx, idx > current ? 'right' : 'left')}
               className={[
-                'transition-all duration-300 rounded-full',
+                'transition-all duration-300 rounded-full cursor-pointer',
                 idx === current
                   ? 'w-6 h-1.5 bg-brand-accent'
                   : 'w-1.5 h-1.5 bg-white/40 hover:bg-white/70',

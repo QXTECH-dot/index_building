@@ -89,7 +89,7 @@ export function Navbar() {
                     aria-expanded={servicesOpen}
                     aria-haspopup="true"
                     className={cn(
-                      'relative flex items-center gap-1 text-[0.8125rem] font-medium tracking-wide transition-colors duration-300 py-1',
+                      'relative flex items-center gap-1 text-[0.8125rem] font-medium tracking-wide transition-colors duration-300 py-1 cursor-pointer',
                       'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:rounded-full',
                       'after:transition-all after:duration-300',
                       isServicesActive
@@ -179,7 +179,7 @@ export function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 -mr-2 transition-colors text-warm-600 hover:text-warm-900"
+          className="md:hidden p-2 -mr-2 transition-colors text-warm-600 hover:text-warm-900 cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
@@ -209,7 +209,7 @@ export function Navbar() {
                     <button
                       onClick={() => setMobileServicesOpen(v => !v)}
                       className={cn(
-                        'w-full flex items-center justify-between px-3 py-3 text-sm font-medium transition-colors',
+                        'w-full flex items-center justify-between px-3 py-3 text-sm font-medium transition-colors cursor-pointer',
                         isServicesActive ? 'text-brand-accent' : 'text-warm-600 hover:text-warm-900'
                       )}
                     >

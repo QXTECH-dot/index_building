@@ -79,7 +79,7 @@ export function FloatingCTA() {
       <button
         onClick={dismiss}
         aria-label="Dismiss"
-        className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-warm-100 hover:bg-warm-200 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-accent text-warm-600"
+        className="flex-shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-warm-100 hover:bg-warm-200 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-brand-accent text-warm-600 cursor-pointer"
       >
         <svg
           className="w-3 h-3"

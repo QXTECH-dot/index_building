@@ -73,7 +73,7 @@ export function ContactForm() {
         <p className="text-warm-600 text-sm">Thank you for reaching out. We'll be in touch shortly.</p>
         <button
           onClick={() => setState('idle')}
-          className="btn-secondary mt-6 text-sm px-5 py-2.5"
+          className="btn-secondary mt-6 text-sm px-5 py-2.5 cursor-pointer"
         >
           Send another message
         </button>

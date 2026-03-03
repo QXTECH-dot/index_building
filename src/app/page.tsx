@@ -121,7 +121,7 @@ export default function HomePage() {
                     src={about.image}
                     alt="Index Building founder Stephen Zhou"
                     fill
-                    className="object-cover"
+                    className="object-cover scale-[1.12]"
                     sizes="(max-width: 1024px) 100vw, 41vw"
                     loading="lazy"
                   />
@@ -209,14 +209,14 @@ export default function HomePage() {
                 <SectionReveal key={item.image} delay={i * 60}>
                   <Link
                     href="/projects"
-                    className={`group block relative overflow-hidden rounded-card bg-warm-100 shadow-card ${i === 0 ? 'col-span-2 lg:col-span-1 aspect-[4/3]' : 'aspect-[4/3]'}`}
+                    className={`group block relative overflow-hidden rounded-card bg-warm-100 shadow-card cursor-pointer ${i === 0 ? 'col-span-2 lg:col-span-1 aspect-[4/3]' : 'aspect-[4/3]'}`}
                     aria-label="View all projects"
                   >
                     <Image
                       src={item.image!}
                       alt={`Index Building project ${i + 1}`}
                       fill
-                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.05]"
+                      className="object-cover scale-[1.12] transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.18]"
                       sizes="(max-width: 640px) 50vw, 33vw"
                       loading="lazy"
                     />

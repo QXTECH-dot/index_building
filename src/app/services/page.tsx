@@ -50,7 +50,7 @@ export default function ServicesPage() {
                         src={service.image}
                         alt={service.name}
                         fill
-                        className="object-cover"
+                        className="object-cover scale-[1.12]"
                         sizes="(max-width: 1024px) 100vw, 41vw"
                         loading="lazy"
                       />
