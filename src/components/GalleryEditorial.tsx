@@ -53,7 +53,7 @@ function GalleryItem({ project, index }: { project: ProjectItem; index: number }
           src={project.image!}
           alt={project.title}
           fill
-          className="object-cover scale-[1.20] transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.26]"
+          className="object-cover scale-[1.22] transition-transform duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] motion-safe:group-hover:scale-[1.28]"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           loading="lazy"
         />
