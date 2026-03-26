@@ -10,7 +10,7 @@
     "crawl": "tsx scripts/fetch-assets.ts"
   },
   "dependencies": {
-    "next": "14.2.29",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
     "class-variance-authority": "^0.7.0",
