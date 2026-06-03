@@ -28,7 +28,7 @@
       "href": "/services"
     },
     {
-      "label": "Projects",
+      "label": "Projects & Gallery",
       "href": "/projects"
     },
     {
@@ -66,7 +66,7 @@
     "services": {
       "slug": "services",
       "title": "Our Services — Index Building Group",
-      "metaDescription": "From new home builds to renovations and knockdown rebuilds, Index Building Group delivers quality residential construction across Canberra and the ACT.",
+      "metaDescription": "From new home builds and renovations to warehouse construction and shop fitouts, Index Building Group delivers residential and commercial building services across Canberra and the ACT.",
       "h1": "What we build",
       "items": [
         {

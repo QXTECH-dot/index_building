@@ -6,6 +6,9 @@ import { getContactPage, getBusiness, SITE_URL } from '@/lib/site-data'
 
 const contact = getContactPage()
 const business = getBusiness()
+const contactEmails = Array.from(
+  new Set(['admin@indexbuilding.com.au', business.email].filter((email): email is string => Boolean(email)))
+)
 
 export const metadata: Metadata = {
   title: contact.title,
@@ -54,15 +57,20 @@ export default function ContactPage() {
               </SectionReveal>
             )}
 
-            {business.email && (
+            {contactEmails.length > 0 && (
               <SectionReveal delay={60}>
                 <ContactBlock eyebrow="Email Us" icon="email">
-                  <a
-                    href={`mailto:${business.email}`}
-                    className="text-warm-900 font-medium hover:text-brand-accent transition-colors duration-300 break-all text-base"
-                  >
-                    {business.email}
-                  </a>
+                  <div className="space-y-2">
+                    {contactEmails.map((email) => (
+                      <a
+                        key={email}
+                        href={`mailto:${email}`}
+                        className="block text-warm-900 font-medium hover:text-brand-accent transition-colors duration-300 break-all text-base"
+                      >
+                        {email}
+                      </a>
+                    ))}
+                  </div>
                 </ContactBlock>
               </SectionReveal>
             )}

@@ -4,6 +4,9 @@ import { getBusiness, getNav, getServicesPage } from '@/lib/site-data'
 const business = getBusiness()
 const navItems = getNav()
 const services = getServicesPage()
+const contactEmails = Array.from(
+  new Set(['admin@indexbuilding.com.au', business.email].filter((email): email is string => Boolean(email)))
+)
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -77,13 +80,18 @@ export function Footer() {
                   {business.phone}
                 </a>
               )}
-              {business.email && (
-                <a
-                  href={`mailto:${business.email}`}
-                  className="block text-sm text-warm-400 hover:text-brand-accent transition-colors duration-300"
-                >
-                  {business.email}
-                </a>
+              {contactEmails.length > 0 && (
+                <div className="space-y-3">
+                  {contactEmails.map((email) => (
+                    <a
+                      key={email}
+                      href={`mailto:${email}`}
+                      className="block text-sm text-warm-400 hover:text-brand-accent transition-colors duration-300 break-all"
+                    >
+                      {email}
+                    </a>
+                  ))}
+                </div>
               )}
               {business.hours?.weekdays && (
                 <p className="text-sm text-warm-500 mt-4 pt-4 border-t border-warm-800">
